@@ -2,6 +2,9 @@ package Tickets;
 
 import java.time.LocalDate;
 
+import Tickets.Types.TicketType;
+import Tickets.Types.IDGenerators.TicketIDGenerator;
+
 public class Ticket {
 	
 	

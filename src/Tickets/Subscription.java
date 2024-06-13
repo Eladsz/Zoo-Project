@@ -2,6 +2,9 @@ package Tickets;
 
 import java.time.LocalDate;
 
+import Tickets.Types.SubscriptionType;
+import Tickets.Types.IDGenerators.SubscriptionIDGenerator;
+
 public class Subscription {
 	
 	private int subscriptionID;

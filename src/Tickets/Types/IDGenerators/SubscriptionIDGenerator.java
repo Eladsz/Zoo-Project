@@ -1,4 +1,4 @@
-package Tickets;
+package Tickets.Types.IDGenerators;
 
 public class SubscriptionIDGenerator {
 	private static 	SubscriptionIDGenerator _instance = null;

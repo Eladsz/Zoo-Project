@@ -3,11 +3,12 @@ package zoo;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import Users.VisitorSystem;
 import abstract_classes.*;
 import animals.*;
 import enums.*;
 import interfaces.*;
-import visitor.VisitorSystem;
 
 public class ZooAplication {
 	public static Scanner scan = new Scanner(System.in);

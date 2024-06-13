@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import Tickets.Types.SubscriptionType;
+import Tickets.Types.TicketType;
+
 public class TicketSystem {
 	private static TicketSystem _instance;
 	private List<Ticket> issuedTickets;

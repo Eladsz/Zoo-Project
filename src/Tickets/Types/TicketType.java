@@ -1,4 +1,4 @@
-package Tickets;
+package Tickets.Types;
 
 public enum TicketType { 
 	

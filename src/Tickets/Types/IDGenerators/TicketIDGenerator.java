@@ -1,4 +1,4 @@
-package Tickets;
+package Tickets.Types.IDGenerators;
 
 public class TicketIDGenerator {
 	private static 	TicketIDGenerator _instance = null;
