@@ -1,8 +1,15 @@
-package Users;
+package Users.Abstracts;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
-public class Person {
+public abstract class Person {
+	@Override
+	public String toString() {
+		return "id=" + id + " \nfirstName=" + firstName + "\nlastName=" + lastName + "\nbirthDate=" + birthDate
+				+ "\nphoneNumber=" + phoneNumber + "\n";
+	}
+
 	private int id;
 	private String firstName;
 	private String lastName;
@@ -23,6 +30,23 @@ public class Person {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Person other = (Person) obj;
+		return id == other.id;
 	}
 
 	public String getFirstName() {

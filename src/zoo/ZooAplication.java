@@ -4,7 +4,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Users.VisitorSystem;
+import Users.Visitor.VisitorSystem;
+import Users.Worker.WorkersAuthenticationSystem;
 import abstract_classes.*;
 import animals.*;
 import enums.*;
@@ -17,9 +18,9 @@ public class ZooAplication {
 //	public static Zoo zoo = Zoo.getZooInstance(" Afeka Zoo ", " Mifza Kadesh 38 ");
 	public static ZooInterface zoo = Zoo.getZooInstance(" Afeka Zoo ", " Mifza Kadesh 38 ");
 
-	public static void main(String[] args) throws ExceptionZoo, InterruptedException {
+	public static void main(String[] args) throws ExceptionZoo, InterruptedException, Exception {
 		zoo.zooContant();
-		VisitorSystem visitorSystem = new VisitorSystem();
+		
 		int choice = 0;
 		System.out.println();
 		do {
@@ -75,7 +76,7 @@ public class ZooAplication {
 				System.out.println();
 				break;
 			case 13:
-				visitorSystemInvoke(visitorSystem);
+				workerAuthentication(WorkersAuthenticationSystem.getInstance());
 				System.out.println();
 				break;
 			default:
@@ -92,10 +93,8 @@ public class ZooAplication {
 
 	}
 
-	public static void visitorSystemInvoke(VisitorSystem visitorSystem) {
-		
-		visitorSystem.logIn();
-		
+	public static void workerAuthentication(WorkersAuthenticationSystem workerAuthentication) throws Exception {
+					workerAuthentication.mainMenu();
 	}
 
 	public static void mainManeuPrint() {
