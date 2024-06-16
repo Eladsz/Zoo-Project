@@ -2,6 +2,7 @@ package Tickets.Types;
 
 public enum SubscriptionType {
 	
+	NULL          			("Null", 999),
 	CHILD					("subscription child", 245),
 	ADULT					("subscription adult", 330),
 	SENIOR					("subscription senior", 245),
@@ -37,6 +38,22 @@ public enum SubscriptionType {
 
 	public int getPrice() {
 		return price;
+	}
+	
+	public static SubscriptionType getByName(String name) {
+		for (SubscriptionType type : SubscriptionType.values()) {
+			if (type.name.equals(name))
+				return type;
+		}
+		return SubscriptionType.NULL;
+	}
+	
+	public static SubscriptionType getByPrice(int price) {
+		for (SubscriptionType type : SubscriptionType.values()) {
+			if (type.price == price)
+				return type;
+		}
+		return SubscriptionType.NULL;
 	}
 	
 }

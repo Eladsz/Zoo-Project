@@ -141,7 +141,7 @@ public class WorkersAuthenticationSystem implements WorkersAuthenticationInterfa
 		int id = enterWorkerID();
 		String firstName = Input.getName("First Name");
 		String lastName = Input.getName("Last Name");
-		LocalDate birthDate = Input.getBirthdate();
+		LocalDate birthDate = Input.getPastDate("Birthdate");
 		String phone = Input.getPhoneNumber();
 		String username = enterUsername();
 		String password = Input.getString("Enter your password: ");

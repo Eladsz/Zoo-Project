@@ -3,19 +3,16 @@ package Users.Visitor;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import IO.Input;
 import Tickets.Ticket;
-import Tickets.Types.SubscriptionType;
-import Tickets.Types.TicketType;
+import Tickets.TicketSystem;
 import zoo.ExceptionZoo;
-public class VisitorSystem implements VisitorSystemInterface {
+public class VisitorSystem {
 
 	private static VisitorSystem _instance = null;
 	private List<Visitor> visitors;
-	private Scanner sc = new Scanner(System.in);
 	
 	private VisitorSystem(){
 		visitors = new ArrayList<Visitor>();
@@ -36,61 +33,16 @@ public class VisitorSystem implements VisitorSystemInterface {
 		return visitors;
 	}
 	
-	public List<Ticket> getTicketsList(){
+	public List<Ticket> getVisitorsTicketsList(){
 		return visitors.stream().map(Visitor::getTicket).collect(Collectors.toList());
 	}
 
 
-
-	@Override
-	public boolean buyTicket(TicketType type) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean buySubscription(SubscriptionType type) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean cancelTicket(int visitorID) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean cancelSubscription(int visitorID) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Ticket findTicket(int visitorID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void printPurchaseHistory(int visitorID) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void printPurchaseHistory(LocalDate date) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void exit() {
 		System.out.println("Back to login menu");
 		
 	}
 
-	@Override
 	public void mainMenu() throws Exception, ExceptionZoo {
 		while (true) {
 			printMenu();
@@ -101,38 +53,33 @@ public class VisitorSystem implements VisitorSystemInterface {
 					return;
 				}
 				case 1:{
-					
-			        TicketType type = TicketType.NULL;
-			        while (type == TicketType.NULL) {
-			        	printTicketTypes();
-			        	String typeChoice = Input.getTicketType();
-			        	System.out.println("DEBUG     " + typeChoice);
-			        	if (typeChoice == "0")
-			        		return;
-			        	type = TicketType.getByName(typeChoice);
-			        	if (type != TicketType.NULL)
-			        		System.out.println("Ticket type: "+ type.getName() + " Price: "+ type.getPrice());
-			        }
-					addNewVisitor();
-					
+					execute(TicketSystem.getInstance().buyTicket(), "Ticket purchasing", TicketSystem.getInstance().getLastPurchasedTicket().toString());
 					break;
 				}
 				case 2:{
+					execute(TicketSystem.getInstance().buySubscription(), "Subscription purchasing", TicketSystem.getInstance().getLastPurchasedSubscription().toString()); 
 					break;
 				}
 				case 3:{
+					execute(TicketSystem.getInstance().cancelTicket(), "Cancel Ticket", "");
 					break;
 				}
 				case 4:{
+					execute(TicketSystem.getInstance().cancelSubscription(), "Cancel Subscription", "");
 					break;
 				}
 				case 5:{
+						checkNull(TicketSystem.getInstance().findTicketByVisitorID(Input.getNineDigitNumber()), "Ticket");
 					break;
 				}
 				case 6:{
+						int id = Input.getNineDigitNumber();
+						checkNull(TicketSystem.getInstance().getPurchaseHistory(id), "Purchase history for ID " + id);
 					break;
 				}
 				case 7:{
+					LocalDate purchaseDate = Input.getPastDate("Purchase date");
+					checkNull(TicketSystem.getInstance().getPurchaseHistory(purchaseDate), "Purchase history for date " + purchaseDate);
 					break;
 				}	
 			}
@@ -140,6 +87,21 @@ public class VisitorSystem implements VisitorSystemInterface {
 	
 		
 	}
+	
+	public static void execute(boolean res, String description, String successDetails) {
+		if (res)
+			System.out.println(description + " done successfully\n" + successDetails);
+		else
+			System.out.println(description + " failed");
+	}
+	
+	public static void checkNull(Object obj, String description) {
+		if(obj == null)
+			System.out.println(description + " - Not found");
+		else
+			System.out.println(obj.toString());
+	}
+
 	
 
 
@@ -164,28 +126,25 @@ public class VisitorSystem implements VisitorSystemInterface {
 		System.out.println("3. Cancel Ticket");
 		System.out.println("4. Cancel Subscription");
 		System.out.println("5. Find ticket by ID");
-		System.out.println("7. Print purchase history");
+		System.out.println("6. Print purchase history by visitor ID");
+		System.out.println("7. Print purchase history by purchasing date");
 		System.out.println("0. log-out");
 	}
+	
+	
 	
 	private void addNewVisitor() throws Exception {
 		System.out.println("Visitor Details: ");
 		int id = Input.getNineDigitNumber();
 		String firstName = Input.getName("Enter your first name:");
 		String lastName = Input.getName("Enter your last name:");
-		LocalDate birthdate = Input.getBirthdate();
+		LocalDate birthdate = Input.getPastDate("Birthdate");
 		String phone = Input.getPhoneNumber();
 		
 		visitors.add(new Visitor(id, firstName, lastName, birthdate, phone));
 		
 	}
 	
-	private void printTicketTypes() {
-		for (TicketType type : TicketType.values()) {
-			if (!type.equals(TicketType.NULL))
-				System.out.println(type.getName() + ": " + type.getPrice() + " ILS");
-		}
-	}
 	
 
 

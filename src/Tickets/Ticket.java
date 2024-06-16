@@ -15,23 +15,23 @@ public class Ticket {
 	private 	LocalDate 		date;
 	private 	TicketType  	ticketType;
 	protected 	String 	    	ticketName;
-	private 	boolean     	cancelationable;
+	private 	boolean     	isAlreadyUsed;
 	
-	public Ticket(int visitorID, TicketType ticketType, LocalDate date, boolean cancelationable) {
+	public Ticket(int visitorID, TicketType ticketType, LocalDate date) {
 		this.ticketID = TicketIDGenerator.getInstance().getID();
 		this.setTicketType(ticketType);
 		this.setVisitorID(visitorID);
 		this.purchaseDate = LocalDate.now();
 		this.setDate(date);
-		this.cancelationable = cancelationable;
+		this.setAlreadyUsed(false);
 	}
 	
 
 	@Override
 	public String toString() {
-		return "Ticket [ticketID=" + ticketID + ", visitorID=" + visitorID + ", price=" + price + ", purchaseDate="
-				+ purchaseDate + ", date=" + date + ", ticketType=" + ticketType + ", ticketName=" + ticketName
-				+ ", cancelationable=" + cancelationable + "]\n\n";
+		return "ticket ID: " + ticketID + ", visitor ID: " + visitorID + ", price: " + price + ", purchase Date: "
+				+ purchaseDate + ", date: " + date + ", ticket Type: " + ticketName
+				+ ", The ticket is already issued: " + isAlreadyUsed;
 	}
 
 
@@ -84,8 +84,13 @@ public class Ticket {
 		return ticketName;
 	}
 
-	public boolean isCancelationable() {
-		return cancelationable;
+	public boolean isAlreadyUsed() {
+		return isAlreadyUsed;
+	}
+
+
+	public void setAlreadyUsed(boolean isAlreadyUsed) {
+		this.isAlreadyUsed = isAlreadyUsed;
 	}
 
 

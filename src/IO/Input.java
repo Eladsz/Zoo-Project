@@ -119,19 +119,19 @@ public class Input {
         return num;
     }
     
-    public static LocalDate getBirthdate() throws Exception {
+    public static LocalDate getPastDate(String description) throws Exception {
         LocalDate birthdate = null;
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         boolean rep;
         do {
             rep = false;
-            System.out.print("Enter your birthdate (dd-MM-yyyy): ");
+            System.out.print("Enter your "+ description + " (dd-MM-yyyy): ");
             String input = scan.nextLine();
             try {
                 birthdate = LocalDate.parse(input, formatter);
-                if (birthdate.getYear() >= LocalDate.now().getYear())
+                if (birthdate.getYear() > LocalDate.now().getYear())
                 {
-                	System.out.print("Error: Invalid date. Please Try Again:");
+                	System.out.print("Error: Invalid date. Please Try Again:\n");
                 	rep = true;
                 }
                 
@@ -145,6 +145,35 @@ public class Input {
         } while (rep);
         return birthdate;
     }
+    
+    public static LocalDate getTicketDate() throws Exception {
+        LocalDate date = null;
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        boolean rep;
+        do {
+            rep = false;
+            System.out.print("Enter the ticket's date (dd-MM-yyyy): ");
+            String input = scan.nextLine();
+            try {
+                date = LocalDate.parse(input, formatter);
+                if (date.getYear() < LocalDate.now().getYear())
+                {
+                	System.out.print("Error: Invalid date. Please Try Again:");
+                	rep = true;
+                }
+                
+            } catch (DateTimeParseException ex) {
+                rep = true;
+                System.out.print("Error: The input must be a valid date in the format dd-MM-yyyy. Please Try Again: ");
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+            
+        } while (rep);
+        return date;
+    }
+    
+    
 	
 	public static boolean getBoolean() {
 		boolean rep;

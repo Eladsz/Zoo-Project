@@ -13,24 +13,31 @@ public class Subscription {
 	private int secondVisitorID;
 	private LocalDate purchaseDate;
 	private LocalDate expiryDate;
-	private boolean cancelationable;
+	private boolean isAlreadyUsed;
 	private int price;
 	private String subscriptionName;
 	
 
-	public Subscription(SubscriptionType subscriptionType, int visitorID, boolean cancelationable) {
+	public Subscription(SubscriptionType subscriptionType, int visitorID) {
 		this.subscriptionID = SubscriptionIDGenerator.getInstance().getID();
 		this.subscriptionType = subscriptionType;
 		this.visitorID = visitorID;
-		this.cancelationable = cancelationable;
+		this.isAlreadyUsed = false;
 		this.purchaseDate = LocalDate.now();
 		this.expiryDate = LocalDate.now().plusYears(1);
 	}
 	
-	public Subscription(SubscriptionType subscriptionType, int visitorID, int secondVisitorID, boolean cancelationable) {
-		this(subscriptionType, visitorID, cancelationable);
+	public Subscription(SubscriptionType subscriptionType, int visitorID, int secondVisitorID) {
+		this(subscriptionType, visitorID);
 		this.secondVisitorID = secondVisitorID;
 
+	}
+
+	@Override
+	public String toString() {
+		return "Subscription ID: " + subscriptionID + ", Subscription Type: " + subscriptionName
+				+ ", visitor ID: " + visitorID + ", second Visitor ID: " + secondVisitorID + ", Purchase Date:" + purchaseDate
+				+ ", Expiry Date: " + expiryDate + ", is Already Used?"  + isAlreadyUsed + ", price: " + price;
 	}
 
 	public int getSubscriptionID() {
@@ -76,11 +83,11 @@ public class Subscription {
 	}
 
 	public boolean isCancelationable() {
-		return cancelationable;
+		return isAlreadyUsed;
 	}
 
-	public void setCancelationable(boolean cancelationable) {
-		this.cancelationable = cancelationable;
+	public void setAllreadyUsed(boolean alreadyUsed) {
+		this.isAlreadyUsed = alreadyUsed;
 	}
 
 	public int getPrice() {
@@ -89,6 +96,10 @@ public class Subscription {
 
 	public String getSubscriptionName() {
 		return subscriptionName;
+	}
+
+	public boolean isAlreadyUsed() {
+		return isAlreadyUsed;
 	}
 	
 
