@@ -182,12 +182,12 @@ public class TicketSystem {
 
 	
 	public TicketType chooseTicketType() {
+		
 		TicketType type = TicketType.NULL;
+		
 		while (type == TicketType.NULL) {
 			printTicketTypes();
 			String typeChoice = Input.getTicketType();
-			if (typeChoice == "0")
-				return TicketType.NULL;
 			type = TicketType.getByName(typeChoice);
 			if (type != TicketType.NULL)
 				System.out.println("Ticket type: "+ type.getName() + " Price: "+ type.getPrice() + " ILS");
@@ -201,8 +201,6 @@ public class TicketSystem {
 		while (type == SubscriptionType.NULL) {
 			printSubscriptionTypes();
 			String typeChoice = Input.getTicketType();
-			if (typeChoice == "0")
-				return SubscriptionType.NULL;
 			type = SubscriptionType.getByName(typeChoice);
 			if (type != SubscriptionType.NULL)
 				System.out.println("Ticket type: "+ type.getName() + " Price: "+ type.getPrice() + " ILS");
@@ -212,16 +210,18 @@ public class TicketSystem {
 	}
 	
 	private void printTicketTypes() {
+		int i = 1;
 		for (TicketType type : TicketType.values()) {
-			if (!type.equals(TicketType.NULL))
-				System.out.println(type.getName() + ": " + type.getPrice() + " ILS");
+			if (!type.equals(TicketType.NULL) && !type.equals(TicketType.SUBSCRIBER))
+				System.out.println((i++)+ ". " + type.getName() + ":\t" + type.getPrice() + " ILS");
 		}
 	}
 	
 	private void printSubscriptionTypes() {
+		int i = 1;
 		for (SubscriptionType type : SubscriptionType.values()) {
 			if (!type.equals(SubscriptionType.NULL))
-				System.out.println(type.getName() + ": " + type.getPrice() + " ILS");
+				System.out.println((i++)+ ". " +type.getName() + ": \t" + type.getPrice() + " ILS");
 		}
 	}
 }
