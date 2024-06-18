@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Users.Visitor.VisitorSystem;
 import Users.Worker.WorkersAuthenticationSystem;
 import abstract_classes.*;
 import animals.*;

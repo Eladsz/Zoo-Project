@@ -3,45 +3,36 @@ package Tickets;
 import java.time.LocalDate;
 
 import Tickets.Types.SubscriptionType;
-import Tickets.Types.IDGenerators.SubscriptionIDGenerator;
 
-public class Subscription {
+public class Subscription extends ItemAbstract{
 	
-	private int subscriptionID;
 	private SubscriptionType subscriptionType;
-	private int visitorID;
 	private int secondVisitorID;
-	private LocalDate purchaseDate;
 	private LocalDate expiryDate;
-	private boolean isAlreadyUsed;
-	private int price;
-	private String subscriptionName;
-	
 
 	public Subscription(SubscriptionType subscriptionType, int visitorID) {
-		this.subscriptionID = SubscriptionIDGenerator.getInstance().getID();
+		super(visitorID, subscriptionType.getPrice(), "Subscription", subscriptionType.getName());
 		this.subscriptionType = subscriptionType;
 		this.visitorID = visitorID;
-		this.isAlreadyUsed = false;
-		this.purchaseDate = LocalDate.now();
 		this.expiryDate = LocalDate.now().plusYears(1);
 	}
 	
 	public Subscription(SubscriptionType subscriptionType, int visitorID, int secondVisitorID) {
 		this(subscriptionType, visitorID);
 		this.secondVisitorID = secondVisitorID;
-
 	}
 
 	@Override
 	public String toString() {
-		return "Subscription ID: " + subscriptionID + ", Subscription Type: " + subscriptionName
-				+ ", visitor ID: " + visitorID + ", second Visitor ID: " + secondVisitorID + ", Purchase Date:" + purchaseDate
-				+ ", Expiry Date: " + expiryDate + ", is Already Used?"  + isAlreadyUsed + ", price: " + price;
-	}
-
-	public int getSubscriptionID() {
-		return subscriptionID;
+		return "\n\nSubscription ID: " + getId() + "\n"
+				+ "Subscription Type: " + getTypeName()+ "\n"
+				+ "visitor ID: " + visitorID + "\n"
+				+ "second Visitor ID: " + secondVisitorID + "\n"
+				+ "Purchase Date:" + purchaseDate+ "\n"
+				+ "Expiry Date: " + expiryDate + "\n"
+				+ "price: " + price
+				+ "is already used?"  + isAlreadyUsed + "\n"
+				+ "is cancelled? " + cancelled + "\n\n";
 	}
 
 	public SubscriptionType getSubscriptionType() {
@@ -50,17 +41,11 @@ public class Subscription {
 
 	public void setSubscriptionType(SubscriptionType subscriptionType) {
 		this.subscriptionType = subscriptionType;
-		this.price = subscriptionType.getPrice();
-		this.subscriptionName = subscriptionType.getName();
+		
+		setPrice(subscriptionType.getPrice());
+		setTypeName(subscriptionType.getName());
 	}
 
-	public int getVisitorID() {
-		return visitorID;
-	}
-
-	public void setVisitorID(int visitorID) {
-		this.visitorID = visitorID;
-	}
 
 	public int getSecondVisitorID() {
 		return secondVisitorID;
@@ -68,10 +53,6 @@ public class Subscription {
 
 	public void setSecondVisitorID(int secondVisitorID) {
 		this.secondVisitorID = secondVisitorID;
-	}
-
-	public LocalDate getPurchaseDate() {
-		return purchaseDate;
 	}
 
 	public LocalDate getExpiryDate() {
@@ -82,25 +63,7 @@ public class Subscription {
 		this.expiryDate = expiryDate;
 	}
 
-	public boolean isCancelationable() {
-		return isAlreadyUsed;
-	}
 
-	public void setAllreadyUsed(boolean alreadyUsed) {
-		this.isAlreadyUsed = alreadyUsed;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public String getSubscriptionName() {
-		return subscriptionName;
-	}
-
-	public boolean isAlreadyUsed() {
-		return isAlreadyUsed;
-	}
 	
 
 }

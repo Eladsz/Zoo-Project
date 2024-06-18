@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import IO.Input;
-import Users.Visitor.VisitorSystem;
-
+import Users.Visitor.VisitorManagementSystem;
 
 public class WorkersAuthenticationSystem implements WorkersAuthenticationInterface {
 
@@ -39,10 +38,9 @@ public class WorkersAuthenticationSystem implements WorkersAuthenticationInterfa
 				break;
 			}
 			case 2:{
-				
-				if(login(Input.getString("Enter your username: "), Input.getString("Enter your password: "))) {
-					
-					VisitorSystem.getInstance().mainMenu();
+				Worker worker = login(Input.getString("Enter your username: "), Input.getString("Enter your password: "));
+				if(worker != null) {
+					 VisitorManagementSystem.getInstance().mainMenu(worker);
 				}
 					
 				mainMenu();
@@ -84,20 +82,20 @@ public class WorkersAuthenticationSystem implements WorkersAuthenticationInterfa
 
 
 	@Override
-	public boolean login(String username, String password) {
+	public Worker login(String username, String password) {
 		if (isUsernameAlreadyExists(username))
 		{
 		    for (Worker w : workers) {
 		    	if (w.authenticate(username, password)) {
 		    		System.out.println("Hello, " + w.getFirstName() + " You are logged in!");
-		    		return true;
+		    		return w;
 		    	}
 		    		
 		    }
 		}
 		else
 			System.out.println("This username is not found please try again");
-		return false;
+		return null;
 	}
 
 	@Override
@@ -173,7 +171,7 @@ public class WorkersAuthenticationSystem implements WorkersAuthenticationInterfa
 		int id = 0;
 		while (exist) {
 			System.out.println("Please enter your ID:");
-			id = Input.getNineDigitNumber();
+			id = Input.getIDFromUser();
 			if(!isIDAlreadyExists(id))
 				exist = false;
 			else

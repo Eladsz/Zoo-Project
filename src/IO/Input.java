@@ -90,7 +90,7 @@ public class Input {
 		return num;
 	}
 	
-    public static int getNineDigitNumber() throws Exception {
+    public static int getIDFromUser() throws Exception {
         int num = 0;
         boolean rep;
         do {

@@ -3,58 +3,37 @@ package Tickets;
 import java.time.LocalDate;
 
 import Tickets.Types.TicketType;
-import Tickets.Types.IDGenerators.TicketIDGenerator;
+import Tickets.Types.IDGenerators.ItemIDGenerator;
 
-public class Ticket {
-	
-	
-	private 	int 			ticketID;
-	private 	int 			visitorID;
-	protected 	int 			price;
-	private 	LocalDate 		purchaseDate;
+public class Ticket extends ItemAbstract {
+
 	private 	LocalDate 		date;
 	private 	TicketType  	ticketType;
-	protected 	String 	    	ticketName;
-	private 	boolean     	isAlreadyUsed;
-	
+
 	public Ticket(int visitorID, TicketType ticketType, LocalDate date) {
-		this.ticketID = TicketIDGenerator.getInstance().getID();
+		super(visitorID, ticketType.getPrice(), "Ticket" ,ticketType.getName());
 		this.setTicketType(ticketType);
 		this.setVisitorID(visitorID);
 		this.purchaseDate = LocalDate.now();
 		this.setDate(date);
 		this.setAlreadyUsed(false);
+		this.setCancelled(false);
 	}
 	
 
 	@Override
 	public String toString() {
-		return "ticket ID: " + ticketID + ", visitor ID: " + visitorID + ", price: " + price + ", purchase Date: "
-				+ purchaseDate + ", date: " + date + ", ticket Type: " + ticketName
-				+ ", The ticket is already issued: " + isAlreadyUsed;
+		return "\n\nticket ID: " + getId() + "\n"
+				+ "visitor ID: " + visitorID + "\n"
+				+ "price: " + price + "\n"
+				+ "purchase Date: "+ purchaseDate + "\n"
+				+ "date: " + date + "\n"
+				+ "ticket Type: " + getTypeName() + "\n"
+				+ "is already used? " + isAlreadyUsed + "\n"
+				+ "is cancelled? " + cancelled + "\n\n";
 	}
 
 
-	public int getID() {
-		return ticketID;
-	}
-
-	public int getVisitorID() {
-		return visitorID;
-	}
-	
-
-	public void setVisitorID(int visitorID) {
-		this.visitorID = visitorID;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public LocalDate getPurchaseDate() {
-		return purchaseDate;
-	}
 
 	public LocalDate getDate() {
 		return date;
@@ -75,23 +54,11 @@ public class Ticket {
 
 	public void setTicketType(TicketType ticketType) {
 		this.ticketType = ticketType;
-		this.price = ticketType.getPrice();
-		this.ticketName = ticketType.getName();
+		setPrice(ticketType.getPrice());
+		this.setTypeName(ticketType.getName());
 	}
 	
 
-	public String getTicketName() {
-		return ticketName;
-	}
-
-	public boolean isAlreadyUsed() {
-		return isAlreadyUsed;
-	}
-
-
-	public void setAlreadyUsed(boolean isAlreadyUsed) {
-		this.isAlreadyUsed = isAlreadyUsed;
-	}
 
 
 }
