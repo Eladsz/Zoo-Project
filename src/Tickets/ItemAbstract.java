@@ -14,11 +14,13 @@ public abstract class ItemAbstract {
 	protected boolean       cancelled;
 	private String 			description;
 	private String    		typeName;
+	protected String  selledBy;
 	
-	public ItemAbstract(int visitorID, int price, String description, String typeName) {
+	public ItemAbstract(int visitorID, int price, String description, String typeName, String servedBy) {
 		this.id = ItemIDGenerator.getInstance().getID();
 		this.setDescription(description);
 		this.setTypeName(typeName);
+		this.setSelledBy(servedBy);
 		this.visitorID = visitorID;
 		this.price = price;
 		this.purchaseDate = LocalDate.now();
@@ -73,6 +75,12 @@ public abstract class ItemAbstract {
 	}
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
+	}
+	public String getSelledBy() {
+		return selledBy;
+	}
+	public void setSelledBy(String servedBy) {
+		this.selledBy = servedBy;
 	}
 	
 }

@@ -20,7 +20,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 	private Set<Ticket> tickets;
 	private Set<Subscription> subscriptions;
 	private static Worker workerLoggedIn;
-	private String servedBySignature;
+	private String selledBy;
 	
 	private VisitorManagementSystem() {
 		visitors = new HashSet<Visitor>();
@@ -85,7 +85,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 		if(visitor != null) {
 			TicketType type = chooseTicketType();
 			LocalDate  date = Input.getTicketDate();
-			Ticket ticket = new Ticket(visitor.getId(), type, date);
+			Ticket ticket = new Ticket(visitor.getId(), type, date, selledBy);
 			return tickets.add(ticket);
 		}
 		return false;
@@ -105,10 +105,10 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 				Visitor secondVisitor = VisitorIdentification();
 				if (secondVisitor == null)
 					return false;
-				subscription = new Subscription(type, visitor.getId(), secondVisitor.getId());
+				subscription = new Subscription(type, visitor.getId(), secondVisitor.getId(), selledBy);
 			}
 			else
-				subscription = new Subscription(type, visitor.getId());
+				subscription = new Subscription(type, visitor.getId(), selledBy);
 			
 			return subscriptions.add(subscription);
 		}
@@ -291,7 +291,6 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 	}
 	
 	private void printTicketTypes() {
-		int i = 1;
 		for (TicketType type : TicketType.values()) {
 			if (!type.equals(TicketType.NULL))
 				System.out.println(type.getIndex() + ". " + type.getName() + ":\t" + type.getPrice() + " ILS");
@@ -299,7 +298,6 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 	}
 	
 	private void printSubscriptionTypes() {
-		int i = 1;
 		for (SubscriptionType type : SubscriptionType.values()) {
 			if (!type.equals(SubscriptionType.NULL))
 				System.out.println(type.getIndex()+ ". " +type.getName() + ": \t" + type.getPrice() + " ILS");
@@ -351,7 +349,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 	
 	public void mainMenu(Worker worker) throws Exception, ExceptionZoo {
 		this.setWorkerLoggedIn(worker);
-		this.setServedBySignature(worker.getFirstName() + worker.getLastName() + "worker ID: "+worker.getWorkerId());
+		this.setSelledBySignature(worker.getFirstName() +" "+ worker.getLastName() + " Worker ID: "+ worker.getWorkerId());
 		
 		while (true) {
 			printMenu();
@@ -428,12 +426,9 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 		VisitorManagementSystem.workerLoggedIn = workerLoggedIn;
 	}
 
-	public String getServedBySignature() {
-		return servedBySignature;
-	}
 
-	public void setServedBySignature(String servedBySignature) {
-		this.servedBySignature = servedBySignature;
+	public void setSelledBySignature(String selledBy) {
+		this.selledBy = selledBy;
 	}
 	
 

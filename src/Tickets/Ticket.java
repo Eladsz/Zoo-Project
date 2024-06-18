@@ -3,15 +3,14 @@ package Tickets;
 import java.time.LocalDate;
 
 import Tickets.Types.TicketType;
-import Tickets.Types.IDGenerators.ItemIDGenerator;
 
 public class Ticket extends ItemAbstract {
 
 	private 	LocalDate 		date;
 	private 	TicketType  	ticketType;
 
-	public Ticket(int visitorID, TicketType ticketType, LocalDate date) {
-		super(visitorID, ticketType.getPrice(), "Ticket" ,ticketType.getName());
+	public Ticket(int visitorID, TicketType ticketType, LocalDate date, String selledBy) {
+		super(visitorID, ticketType.getPrice(), "Ticket" ,ticketType.getName(), selledBy);
 		this.setTicketType(ticketType);
 		this.setVisitorID(visitorID);
 		this.purchaseDate = LocalDate.now();
@@ -30,7 +29,8 @@ public class Ticket extends ItemAbstract {
 				+ "date: " + date + "\n"
 				+ "ticket Type: " + getTypeName() + "\n"
 				+ "is already used? " + isAlreadyUsed + "\n"
-				+ "is cancelled? " + cancelled + "\n\n";
+				+ "is cancelled? " + cancelled + "\n"
+				+ "Selled by " + getSelledBy() + "\n\n";
 	}
 
 

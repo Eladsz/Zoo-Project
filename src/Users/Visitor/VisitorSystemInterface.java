@@ -1,10 +1,7 @@
 package Users.Visitor;
 
 import java.time.LocalDate;
-import java.util.List;
-
 import Tickets.Ticket;
-import Tickets.Types.TicketType;
 import Users.Worker.Worker;
 import zoo.ExceptionZoo;
 

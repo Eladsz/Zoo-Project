@@ -10,15 +10,15 @@ public class Subscription extends ItemAbstract{
 	private int secondVisitorID;
 	private LocalDate expiryDate;
 
-	public Subscription(SubscriptionType subscriptionType, int visitorID) {
-		super(visitorID, subscriptionType.getPrice(), "Subscription", subscriptionType.getName());
+	public Subscription(SubscriptionType subscriptionType, int visitorID, String selledBy) {
+		super(visitorID, subscriptionType.getPrice(), "Subscription", subscriptionType.getName(), selledBy);
 		this.subscriptionType = subscriptionType;
 		this.visitorID = visitorID;
 		this.expiryDate = LocalDate.now().plusYears(1);
 	}
 	
-	public Subscription(SubscriptionType subscriptionType, int visitorID, int secondVisitorID) {
-		this(subscriptionType, visitorID);
+	public Subscription(SubscriptionType subscriptionType, int visitorID, int secondVisitorID, String selledBy) {
+		this(subscriptionType, visitorID, selledBy);
 		this.secondVisitorID = secondVisitorID;
 	}
 
@@ -32,7 +32,8 @@ public class Subscription extends ItemAbstract{
 				+ "Expiry Date: " + expiryDate + "\n"
 				+ "price: " + price
 				+ "is already used?"  + isAlreadyUsed + "\n"
-				+ "is cancelled? " + cancelled + "\n\n";
+				+ "is cancelled? " + cancelled + "\n"
+				+ "Selled by " + getSelledBy() + "\n\n";
 	}
 
 	public SubscriptionType getSubscriptionType() {
