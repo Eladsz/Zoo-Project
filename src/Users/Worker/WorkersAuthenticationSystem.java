@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import IO.Input;
+import Users.Interfaces.WorkersAuthenticationInterface;
 import Users.Visitor.VisitorManagementSystem;
 
 public class WorkersAuthenticationSystem implements WorkersAuthenticationInterface {

@@ -9,6 +9,7 @@ import java.util.Scanner;
 import Tickets.Types.TicketType;
 
 public class Input {
+	
 	static Scanner scan = new Scanner(System.in);
 
     public static String getPhoneNumber() throws Exception {

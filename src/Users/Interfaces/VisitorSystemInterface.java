@@ -1,4 +1,4 @@
-package Users.Visitor;
+package Users.Interfaces;
 
 import java.time.LocalDate;
 import Tickets.Ticket;

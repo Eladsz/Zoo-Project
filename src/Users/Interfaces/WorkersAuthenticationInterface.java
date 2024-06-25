@@ -1,6 +1,9 @@
-package Users.Worker;
+package Users.Interfaces;
 
 import java.util.List;
+
+import Users.Worker.Account;
+import Users.Worker.Worker;
 
 public interface WorkersAuthenticationInterface {
 	public void    mainMenu() throws Exception;
