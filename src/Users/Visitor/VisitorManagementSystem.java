@@ -11,20 +11,26 @@ import Tickets.Subscription;
 import Tickets.Ticket;
 import Tickets.Types.SubscriptionType;
 import Tickets.Types.TicketType;
+import Users.Interfaces.VisitorSystemInterface;
 import Users.Worker.Worker;
 import zoo.ExceptionZoo;
 
 public class VisitorManagementSystem implements VisitorSystemInterface {
-	private static VisitorSystemInterface _instance;
-	private Set<Visitor> visitors;
-	private Set<Ticket> tickets;
-	private Set<Subscription> subscriptions;
-	private static Worker workerLoggedIn;
-	private String selledBy;
+	
+	private static 				VisitorSystemInterface _instance;
+	private Set<Visitor> 		visitors;
+	private Set<Ticket> 		tickets;
+	private Set<Ticket> 		issuedTickets;
+	private Set<Subscription> 	issuedSubscriptions;
+	private Set<Subscription> 	subscriptions;
+	private static Worker 		workerLoggedIn;
+	private String 				selledBy;
 	
 	private VisitorManagementSystem() {
 		visitors = new HashSet<Visitor>();
 		tickets = new HashSet<Ticket>();
+		issuedTickets = new HashSet<Ticket>();
+		issuedSubscriptions = new HashSet<Subscription>();
 		subscriptions = new HashSet<Subscription>();
 		
 	}
@@ -54,7 +60,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 			
 		
 		ticket.setAlreadyUsed(true);
-		return true;
+		return issuedTickets.add(ticket);
 	}
 	
 	public synchronized boolean issueSubscription(Subscription subscription) {
@@ -75,7 +81,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 			
 		
 		subscription.setAlreadyUsed(true);
-		return true;
+		return issuedSubscriptions.add(subscription);
 	}
 	
 	@Override
@@ -201,6 +207,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
     		return true;
     	}
     		
+    	sub.setCancelled(true);
     	return sub.isCancelled();
 	}
 	
@@ -223,7 +230,9 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
     		
     	if(ticket.isCancelled())
     		System.out.println("Ticket is already cancelled");
-    		
+    	
+    	
+    	ticket.setCancelled(true);
     	return ticket.isCancelled();
     }
     
@@ -335,6 +344,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 	}
 
 	private void printMenu() {
+		System.out.println("\n\n\n*********************************");
 		System.out.println("Visitors management system menu:");
 		System.out.println("1. Buy ticket");
 		System.out.println("2. Buy Subscription");
@@ -345,6 +355,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 		System.out.println("7. Issue Ticket");
 		System.out.println("8. Issue Subscriber");
 		System.out.println("0. log-out");
+		System.out.println("*********************************");
 	}
 	
 	public void mainMenu(Worker worker) throws Exception, ExceptionZoo {
@@ -368,11 +379,11 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 					break;
 				}
 				case 3:{
-					execute(cancelTicket(), "Cancel Ticket", "");
+					execute(cancelTicket(), "Ticket Cancel", "");
 					break;
 				}
 				case 4:{
-					execute(cancelSubscription(), "Cancel Subscription", "");
+					execute(cancelSubscription(), "Subscription Cancel", "");
 					break;
 				}
 				case 5:{
@@ -428,7 +439,17 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 
 
 	public void setSelledBySignature(String selledBy) {
+
 		this.selledBy = selledBy;
+	}
+
+	
+	public Set<Ticket> getIssuedTickets() {
+		return issuedTickets;
+	}
+
+	public Set<Subscription> getIssuedSubscriptions() {
+		return issuedSubscriptions;
 	}
 	
 
