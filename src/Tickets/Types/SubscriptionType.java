@@ -1,6 +1,9 @@
 package Tickets.Types;
 
-public enum SubscriptionType {
+import java.util.ArrayList;
+import java.util.List;
+
+public enum SubscriptionType implements TypeInterface{
 	
 	NULL          			(0, "Null", 999),
 	CHILD					(1, "subscription child", 245),
@@ -24,9 +27,10 @@ public enum SubscriptionType {
 	PARENT_PLUS_FIVE		(19, "subscription parent + 5", 795),
 	PARENT_PLUS_SIX_OR_MORE	(20, "subscription parent + 6 or more", 830);
 	
-	private final String name;
-	private final int    price;
+	private String name;
+	private int    price;
 	private final int    index;
+	private static List<CustomTicketType> customTypes = new ArrayList<>();
 	
 	SubscriptionType(int index, String name, int price){
 		this.name = name;
@@ -34,37 +38,70 @@ public enum SubscriptionType {
 		this.index = index;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public int getPrice() {
 		return price;
 	}
 	
-	public static SubscriptionType getType(String name) {
+	public static TypeInterface getType(String name) {
 		for (SubscriptionType type : SubscriptionType.values()) {
 			if (type.name.equals(name))
 				return type;
 		}
-		return SubscriptionType.NULL;
-	}
-	
-	
-	public static SubscriptionType getType(int index) {
-		for (SubscriptionType type : SubscriptionType.values()) {
-			if (type.index == index)
+		for (CustomTicketType type : getCustomTypes()) {
+			if (type.getName().equals(name))
 				return type;
 		}
 		return SubscriptionType.NULL;
 	}
+	
+	
+	public static TypeInterface getType(int index) {
+		for (SubscriptionType type : SubscriptionType.values()) {
+			if (type.index == index)
+				return type;
+		}
+		for (CustomTicketType type : getCustomTypes()) {
+			if (type.getIndex() == index)
+				return type;
+		}
+		return SubscriptionType.NULL;
+	}
+	
+	@Override
 	public int getIndex() {
 		return index;
 	}
 	
 	public static int getLastIndex() {
-		return SubscriptionType.values().length -1;
+		return SubscriptionType.values().length -1 + getCustomTypes().size();
 	}
+	
+	public static boolean addCustomType(String name, int price) {
+		return getCustomTypes().add(new CustomTicketType(getLastIndex() +1, name, price));
+	}
+
+	public static List<CustomTicketType> getCustomTypes() {
+		return customTypes;
+	}
+
+	@Override
+	public void setPrice(int newPrice) {
+		this.price = newPrice;
+		
+	}
+
+	@Override
+	public void setName(String newName) {
+		this.name = newName;
+		
+	}
+
 	
 	
 }

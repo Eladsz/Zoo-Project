@@ -6,8 +6,6 @@ import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import Tickets.Types.TicketType;
-
 public class Input {
 	
 	static Scanner scan = new Scanner(System.in);
@@ -75,7 +73,35 @@ public class Input {
 				if (num < from || num > to) {
 					rep = true;
 					scan.nextLine();
-					System.out.print("Error: number out of range, you have to choose a number between "+ from + " - " + to + "\nTry Again: ");
+					System.out.println("Error: number out of range, you have to choose a number between "+ from + " - " + to + "\nTry Again: ");
+				}
+				
+			} catch(InputMismatchException ex) {
+				rep = true;
+				System.out.print("Error: The input must be an Integer\nTry Again: ");
+				scan.nextLine();
+			} catch (Exception ex) {
+				System.out.println(ex.getMessage());
+			}
+			
+		}while (rep);
+		scan.nextLine();
+		return num;
+	}
+	
+	public static int getNumberInRange(int from, int to, String msg) throws Exception {
+		int num = 0;
+		boolean rep;
+		do {
+			System.out.print(msg + ": ");
+			rep = false;
+			try {
+				num = scan.nextInt();
+				
+				if (num < from || num > to) {
+					rep = true;
+					scan.nextLine();
+					System.out.println("Error: number out of range, you have to choose a number between "+ from + " - " + to + "\nTry Again: ");
 				}
 				
 			} catch(InputMismatchException ex) {

@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import IO.Input;
-import Users.Interfaces.WorkersAuthenticationInterface;
+import Users.Interfaces.AuthenticationSystemInterface;
+import Users.Interfaces.MenuInterface;
 import Users.Visitor.VisitorManagementSystem;
 
-public class WorkersAuthenticationSystem implements WorkersAuthenticationInterface {
+public class WorkersAuthenticationSystem implements AuthenticationSystemInterface, MenuInterface {
 
 	private List<Worker> workers;
 	private static WorkersAuthenticationSystem _instance;
@@ -29,19 +30,20 @@ public class WorkersAuthenticationSystem implements WorkersAuthenticationInterfa
 	@Override
 	public void mainMenu() throws Exception {
 		
-		PrintMainMenu();
+		printMenu();
 		int choice = getMainMenuChoice();
 		
 		switch (choice) {
 			case 1: {
-				createNewWorkerAccount();
+				createNewAccount();
 				mainMenu();
 				break;
 			}
 			case 2:{
-				Worker worker = login(Input.getString("Enter your username: "), Input.getString("Enter your password: "));
+				Worker worker = login(Input.getString("Enter your username:"), Input.getString("Enter your password:"));
 				if(worker != null) {
-					 VisitorManagementSystem.getInstance().mainMenu(worker);
+					((VisitorManagementSystem) VisitorManagementSystem.getInstance()).setWorkerLoggedIn(worker);
+					 ((MenuInterface) VisitorManagementSystem.getInstance()).mainMenu();
 				}
 					
 				mainMenu();
@@ -60,10 +62,11 @@ public class WorkersAuthenticationSystem implements WorkersAuthenticationInterfa
 		
 	}
 
-	private void PrintMainMenu() {
+	@Override
+	public void printMenu() {
+		System.out.println("0. Back");
 		System.out.println("1. Create new worker account");
 		System.out.println("2. Log-in");
-		System.out.println("0. Back");
 		System.out.println("Please Enter your choice: ");
 	}
 
@@ -100,13 +103,11 @@ public class WorkersAuthenticationSystem implements WorkersAuthenticationInterfa
 	}
 
 	@Override
-	public List<Account> getWorkersAccounts() {
+	public List<Account> getAccounts() {
 		if (workers != null && workers.size() > 0)
 			return workers.stream().map(Worker::getAccount).collect(Collectors.toList());
 		return null;
 	}
-
-
 
 	@Override
 	public void exit() {
@@ -136,7 +137,7 @@ public class WorkersAuthenticationSystem implements WorkersAuthenticationInterfa
 	}
 
 	@Override
-	public void createNewWorkerAccount() throws Exception {
+	public void createNewAccount() throws Exception {
 		int id = enterWorkerID();
 		String firstName = Input.getName("First Name");
 		String lastName = Input.getName("Last Name");

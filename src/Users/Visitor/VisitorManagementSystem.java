@@ -9,13 +9,15 @@ import java.util.Set;
 import IO.Input;
 import Tickets.Subscription;
 import Tickets.Ticket;
+import Tickets.Types.CustomTicketType;
 import Tickets.Types.SubscriptionType;
 import Tickets.Types.TicketType;
+import Tickets.Types.TypeInterface;
+import Users.Interfaces.MenuInterface;
 import Users.Interfaces.VisitorSystemInterface;
 import Users.Worker.Worker;
-import zoo.ExceptionZoo;
 
-public class VisitorManagementSystem implements VisitorSystemInterface {
+public class VisitorManagementSystem implements VisitorSystemInterface, MenuInterface {
 	
 	private static 				VisitorSystemInterface _instance;
 	private Set<Visitor> 		visitors;
@@ -89,9 +91,8 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 		
 		Visitor visitor = VisitorIdentification();
 		if(visitor != null) {
-			TicketType type = chooseTicketType();
-			LocalDate  date = Input.getTicketDate();
-			Ticket ticket = new Ticket(visitor.getId(), type, date, selledBy);
+			TypeInterface type = chooseTicketType();
+			Ticket ticket = new Ticket(visitor.getId(), type, selledBy);
 			return tickets.add(ticket);
 		}
 		return false;
@@ -104,7 +105,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 
 		if(visitor != null) {
 			Subscription subscription;
-			SubscriptionType type = chooseSubscriptionType();
+			TypeInterface type = chooseSubscriptionType();
 			
 			if (type.getName().contains("couple")) {
 				
@@ -270,9 +271,9 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 		return sb.toString();
 	}
 
-	public TicketType chooseTicketType() throws Exception {
+	public TypeInterface chooseTicketType() throws Exception {
 		
-		TicketType type = TicketType.NULL;
+		TypeInterface type = TicketType.NULL;
 		
 		while (type == TicketType.NULL) {
 			printTicketTypes();
@@ -285,9 +286,9 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 		return type;
 	}
 	
-	private SubscriptionType chooseSubscriptionType() throws Exception {
+	private TypeInterface chooseSubscriptionType() throws Exception {
 		
-		SubscriptionType type = SubscriptionType.NULL;
+		TypeInterface type = SubscriptionType.NULL;
 		while (type == SubscriptionType.NULL) {
 			printSubscriptionTypes();
 			int typeChoice = Input.getNumberInRange(1, SubscriptionType.getLastIndex());
@@ -304,6 +305,9 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 			if (!type.equals(TicketType.NULL))
 				System.out.println(type.getIndex() + ". " + type.getName() + ":\t" + type.getPrice() + " ILS");
 		}
+		for (TypeInterface type : TicketType.getCustomTypes()) {
+				System.out.println(type.getIndex() + ". " + type.getName() + ":\t" + type.getPrice() + " ILS");
+		}
 	}
 	
 	private void printSubscriptionTypes() {
@@ -311,13 +315,16 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 			if (!type.equals(SubscriptionType.NULL))
 				System.out.println(type.getIndex()+ ". " +type.getName() + ": \t" + type.getPrice() + " ILS");
 		}
+		for (TypeInterface type : SubscriptionType.getCustomTypes()) {
+				System.out.println(type.getIndex()+ ". " +type.getName() + ": \t" + type.getPrice() + " ILS");
+		}
 	}
 	
 	private boolean addNewVisitor(int id) throws Exception {
 		System.out.println("New Visitor Details: ");
 
-		String firstName = Input.getName("Enter your first name:");
-		String lastName = Input.getName("Enter your last name:");
+		String firstName = Input.getName("Enter your first name");
+		String lastName = Input.getName("Enter your last name");
 		LocalDate birthdate = Input.getPastDate("Birthdate");
 		String phone = Input.getPhoneNumber();
 		return visitors.add(new Visitor(id, firstName, lastName, birthdate, phone));
@@ -343,28 +350,31 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 		return choice;
 	}
 
-	private void printMenu() {
+	@Override
+	public void printMenu() {
 		System.out.println("\n\n\n*********************************");
 		System.out.println("Visitors management system menu:");
-		System.out.println("1. Buy ticket");
-		System.out.println("2. Buy Subscription");
-		System.out.println("3. Cancel Ticket");
-		System.out.println("4. Cancel Subscription");
-		System.out.println("5. Find ticket by ID");
-		System.out.println("6. Print purchase history by visitor ID & Date");
-		System.out.println("7. Issue Ticket");
-		System.out.println("8. Issue Subscriber");
-		System.out.println("0. log-out");
+		System.out.println(" 1. Buy ticket");
+		System.out.println(" 2. Buy Subscription");
+		System.out.println(" 3. Cancel Ticket");
+		System.out.println(" 4. Cancel Subscription");
+		System.out.println(" 5. Find ticket by ID");
+		System.out.println(" 6. Print purchase history by visitor ID & Date");
+		System.out.println(" 7. Issue Ticket");
+		System.out.println(" 8. Issue Subscriber");
+		System.out.println(" 9. Add new Item");
+		System.out.println("10. Remove Item");
+		System.out.println("11. Update Item");
+		System.out.println(" 0. log-out");
 		System.out.println("*********************************");
 	}
 	
-	public void mainMenu(Worker worker) throws Exception, ExceptionZoo {
-		this.setWorkerLoggedIn(worker);
-		this.setSelledBySignature(worker.getFirstName() +" "+ worker.getLastName() + " Worker ID: "+ worker.getWorkerId());
+	@Override
+	public void mainMenu() throws Exception {
 		
 		while (true) {
 			printMenu();
-			int choice = getMenuChoice(0,8);
+			int choice = getMenuChoice(0,11);
 			switch (choice) {
 				case 0: {
 					exit();
@@ -406,10 +416,158 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 					
 					break;
 				}	
+				case 9:{
+					AddNewItem();
+					
+					break;
+				}	
+				case 10:{
+					removeItem();
+					break;
+				}
+				case 11: {
+					updateItem();
+					break;
+				}
 			}
 		}
 	
 		
+	}
+
+	@Override
+	public void updateItem() throws Exception {
+		System.out.println("Choose item:");
+		System.out.println("0. Return to main menu");
+		System.out.println("1. Update ticket");
+		System.out.println("2. Update subscription");
+		int choice = getMenuChoice(0,2);
+		switch (choice) {
+			case 0:{
+				return;
+			}
+			case 1: {
+					TypeInterface type = chooseTicketType();
+					type.setName(Input.getName("Enter new ticket name"));
+					type.setPrice(Input.getNumberInRange(0, 1000, "Enter new ticket price"));
+					System.out.println("Ticket updated: " + type.getName() + " " + type.getPrice() + " ILS");
+					break;
+			}
+			case 2:{
+				TypeInterface type = chooseSubscriptionType();
+				type.setName(Input.getName("Enter new subscription name"));
+				type.setPrice(Input.getNumberInRange(0, 1000, "Enter new subscription price"));
+				System.out.println("Subscription updated: " + type.getName() + " " + type.getPrice() + " ILS");
+				break;
+			}
+		}
+	}
+	
+	@Override
+	public void AddNewItem() throws Exception {
+		System.out.println("Choose item:");
+		System.out.println("0. Return to main menu");
+		System.out.println("1. Add new ticket type");
+		System.out.println("2. Add new subscription type");
+		int choice = getMenuChoice(0,2);
+		switch (choice) {
+			case 0:{
+				return;
+			}
+			case 1: {
+				execute(TicketType.addCustomType(Input.getName("Ticket name"), Input.getNumberInRange(0, Integer.MAX_VALUE,"Enter the price")),"Add new ticket type", "");
+				break;
+			}
+			case 2:{
+				execute(SubscriptionType.addCustomType(Input.getName("Subscription name"), Input.getNumberInRange(0, Integer.MAX_VALUE,"Enter the price")), "Add new subscription type","");
+				break;
+			}
+				
+			
+		}
+	}
+	
+	@Override
+	public void removeItem() {
+		System.out.println("Choose item:");
+		System.out.println("0. Return to main menu");
+		System.out.println("1. Remove custom ticket type");
+		System.out.println("2. Remove custom subscription type");
+		int choice = getMenuChoice(0,2);
+		switch (choice) {
+			case 0:{
+				return;
+			}
+			case 1: {
+				if(TicketType.getCustomTypes() != null && TicketType.getCustomTypes().size() > 0) {
+					RemoveTicketType();
+				}
+				else
+					System.out.println("Custom ticket types are empty");
+
+				break;
+			}
+			case 2:{
+				
+				if(SubscriptionType.getCustomTypes() != null && SubscriptionType.getCustomTypes().size() > 0) {
+					removeSubscriptionType();
+				}				
+				else
+					System.out.println("Custom Subscription types are empty");
+
+				break;
+			}
+		}
+	}
+
+	private void removeSubscriptionType() {
+		printCustomSubscriptionTypes();
+		int typeIndex = chooseCustomType(SubscriptionType.getCustomTypes());
+		TypeInterface type = SubscriptionType.getType(typeIndex);
+		if(SubscriptionType.getCustomTypes().remove(type))
+			System.out.println("Subscription: " + type.getName() + " removed successfully");
+		else
+			System.out.println("Remove Subscription - failed");
+	}
+
+	private void RemoveTicketType() {
+		printCustomTicketTypes();
+		int typeIndex = chooseCustomType(TicketType.getCustomTypes());
+		TypeInterface type = TicketType.getType(typeIndex);
+		if(TicketType.getCustomTypes().remove(type))
+			System.out.println("Ticket: " + type.getName() + " removed successfully");
+		else
+			System.out.println("Remove Ticket - failed");
+		}
+
+	private int chooseCustomType(List<CustomTicketType> customTypes)  {
+		int lastIndex = customTypes.size() -1;
+		int choice = -1;
+		while (choice == -1) {
+			try {
+				choice = Input.getNumberInRange(customTypes.get(0).getIndex(), customTypes.get(lastIndex).getIndex());
+				return choice;
+			}
+			catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return choice;
+	}
+
+	private void printCustomTicketTypes() {
+		System.out.println("Choose a ticket type: ");
+		for (TypeInterface type : TicketType.getCustomTypes()) {
+		   System.out.println(type.getIndex() + ". " + type.getName() + " " + type.getPrice() + " ILS");
+		}
+	}
+	
+	private void printCustomSubscriptionTypes() {
+		System.out.println("Choose a ticket type: ");
+		for (TypeInterface type : SubscriptionType.getCustomTypes()) {
+		   System.out.println(type.getIndex() + ". " + type.getName() + " " + type.getPrice() + " ILS");
+		}
 	}
 	
 
@@ -435,6 +593,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 
 	public void setWorkerLoggedIn(Worker workerLoggedIn) {
 		VisitorManagementSystem.workerLoggedIn = workerLoggedIn;
+		this.setSelledBySignature(workerLoggedIn.getFirstName() +" "+ workerLoggedIn.getLastName() + " Worker ID: "+ workerLoggedIn.getWorkerId());
 	}
 
 

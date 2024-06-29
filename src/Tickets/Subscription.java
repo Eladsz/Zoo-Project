@@ -2,23 +2,23 @@ package Tickets;
 
 import java.time.LocalDate;
 
-import Tickets.Types.SubscriptionType;
+import Tickets.Types.TypeInterface;
 
 public class Subscription extends ItemAbstract{
 	
-	private SubscriptionType subscriptionType;
+	private TypeInterface subscriptionType;
 	private int secondVisitorID;
 	private LocalDate expiryDate;
 
-	public Subscription(SubscriptionType subscriptionType, int visitorID, String selledBy) {
-		super(visitorID, subscriptionType.getPrice(), "Subscription", subscriptionType.getName(), selledBy);
-		this.subscriptionType = subscriptionType;
+	public Subscription(TypeInterface type, int visitorID, String selledBy) {
+		super(visitorID, type.getPrice(), "Subscription", type.getName(), selledBy);
+		this.subscriptionType = type;
 		this.visitorID = visitorID;
 		this.expiryDate = LocalDate.now().plusYears(1);
 	}
 	
-	public Subscription(SubscriptionType subscriptionType, int visitorID, int secondVisitorID, String selledBy) {
-		this(subscriptionType, visitorID, selledBy);
+	public Subscription(TypeInterface type, int visitorID, int secondVisitorID, String selledBy) {
+		this(type, visitorID, selledBy);
 		this.secondVisitorID = secondVisitorID;
 	}
 
@@ -30,17 +30,17 @@ public class Subscription extends ItemAbstract{
 				+ "second Visitor ID: " + secondVisitorID + "\n"
 				+ "Purchase Date:" + purchaseDate+ "\n"
 				+ "Expiry Date: " + expiryDate + "\n"
-				+ "price: " + price
-				+ "is already used?"  + isAlreadyUsed + "\n"
+				+ "price: " + price + "\n"
+				+ "is already used? "  + isAlreadyUsed + "\n"
 				+ "is cancelled? " + cancelled + "\n"
 				+ "Selled by " + getSelledBy() + "\n\n";
 	}
 
-	public SubscriptionType getSubscriptionType() {
+	public TypeInterface getSubscriptionType() {
 		return subscriptionType;
 	}
 
-	public void setSubscriptionType(SubscriptionType subscriptionType) {
+	public void setSubscriptionType(TypeInterface subscriptionType) {
 		this.subscriptionType = subscriptionType;
 		
 		setPrice(subscriptionType.getPrice());

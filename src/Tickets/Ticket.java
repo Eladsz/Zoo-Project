@@ -2,19 +2,17 @@ package Tickets;
 
 import java.time.LocalDate;
 
-import Tickets.Types.TicketType;
+import Tickets.Types.TypeInterface;
 
 public class Ticket extends ItemAbstract {
 
-	private 	LocalDate 		date;
-	private 	TicketType  	ticketType;
+	private TypeInterface  	ticketType;
 
-	public Ticket(int visitorID, TicketType ticketType, LocalDate date, String selledBy) {
-		super(visitorID, ticketType.getPrice(), "Ticket" ,ticketType.getName(), selledBy);
-		this.setTicketType(ticketType);
+	public Ticket(int visitorID, TypeInterface type, String selledBy) {
+		super(visitorID, type.getPrice(), "Ticket" ,type.getName(), selledBy);
+		this.setTicketType(type);
 		this.setVisitorID(visitorID);
 		this.purchaseDate = LocalDate.now();
-		this.setDate(date);
 		this.setAlreadyUsed(false);
 		this.setCancelled(false);
 	}
@@ -26,7 +24,6 @@ public class Ticket extends ItemAbstract {
 				+ "visitor ID: " + visitorID + "\n"
 				+ "price: " + price + "\n"
 				+ "purchase Date: "+ purchaseDate + "\n"
-				+ "date: " + date + "\n"
 				+ "ticket Type: " + getTypeName() + "\n"
 				+ "is already used? " + isAlreadyUsed + "\n"
 				+ "is cancelled? " + cancelled + "\n"
@@ -34,28 +31,14 @@ public class Ticket extends ItemAbstract {
 	}
 
 
-
-	public LocalDate getDate() {
-		return date;
-	}
-
-	public boolean setDate(LocalDate date) {
-		
-		if (date.isBefore(LocalDate.now()))
-			return false;
-		
-		this.date = date;
-		return true;
-	}
-
-	public TicketType getTicketType() {
+	public TypeInterface getTicketType() {
 		return ticketType;
 	}
 
-	public void setTicketType(TicketType ticketType) {
-		this.ticketType = ticketType;
-		setPrice(ticketType.getPrice());
-		this.setTypeName(ticketType.getName());
+	public void setTicketType(TypeInterface type) {
+		this.ticketType = type;
+		setPrice(type.getPrice());
+		this.setTypeName(type.getName());
 	}
 	
 
