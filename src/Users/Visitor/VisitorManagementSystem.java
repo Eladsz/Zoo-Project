@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import IO.Input;
+import InputSystem.Input;
 import NotificationSystem.Event;
 import NotificationSystem.NotificationService;
 import Tickets.ItemAbstract;
@@ -16,24 +16,24 @@ import Tickets.Ticket;
 import Tickets.Types.CustomTicketType;
 import Tickets.Types.SubscriptionType;
 import Tickets.Types.TicketType;
-import Tickets.Types.TypeInterface;
-import Users.Interfaces.MenuInterface;
-import Users.Interfaces.VisitorSystemInterface;
 import Users.Worker.Worker;
+import interfaces.MenuInterface;
+import interfaces.ItemTypeInterface;
+import interfaces.VisitorSystemInterface;
 
 public class VisitorManagementSystem implements VisitorSystemInterface, MenuInterface {
 	
 	private static 				VisitorSystemInterface _instance;
 	private Set<Visitor> 		visitors;
 	private Set<ItemAbstract> 	tickets;
-	private List<ItemAbstract> 	issuedTickets;
+	private Set<ItemAbstract> 	issuedTickets;
 	private static Worker 		workerLoggedIn;
 	private String 				selledBy;
 	
 	private VisitorManagementSystem() {
 		visitors = new HashSet<Visitor>();
 		tickets = new HashSet<ItemAbstract>();
-		issuedTickets = new ArrayList<ItemAbstract>();
+		issuedTickets = new HashSet<ItemAbstract>();
 	}
 	
 	public static synchronized VisitorSystemInterface getInstance() {
@@ -70,19 +70,22 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
 			return false;
 		}
 		
-		if(subscription.isAlreadyUsed()) {
-			System.out.println("Ticket is already used. please buy new ticket");
-			return false;
-		}
 			
 		if(subscription.isCancelled()) {
 			System.out.println("Ticket is cancelled. please buy new ticket");
 			return false;
 		}
+		
+		if(LocalDate.now().isAfter(subscription.getExpiryDate())) {
+			System.out.println("The subscription date is expired");
+			return false;
+		}
+			
 			
 		
 		subscription.setAlreadyUsed(true);
-		return issuedTickets.add(subscription);
+		issuedTickets.add(subscription);
+		return true;
 	}
 	
 	@Override
@@ -90,7 +93,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
 		
 		Visitor visitor = VisitorIdentification();
 		if(visitor != null) {
-			TypeInterface type = chooseTicketType();
+			ItemTypeInterface type = chooseTicketType();
 			Ticket ticket = new Ticket(visitor.getId(), type, selledBy);
 			return tickets.add(ticket);
 		}
@@ -104,7 +107,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
 
 		if(visitor != null) {
 			Subscription subscription;
-			TypeInterface type = chooseSubscriptionType();
+			ItemTypeInterface type = chooseSubscriptionType();
 			
 			if (type.getName().contains("couple")) {
 				
@@ -270,9 +273,9 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
 		return sb.toString();
 	}
 
-	public TypeInterface chooseTicketType() throws Exception {
+	public ItemTypeInterface chooseTicketType() throws Exception {
 		
-		TypeInterface type = TicketType.NULL;
+		ItemTypeInterface type = TicketType.NULL;
 		
 		while (type == TicketType.NULL) {
 			printTicketTypes();
@@ -285,9 +288,9 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
 		return type;
 	}
 	
-	private TypeInterface chooseSubscriptionType() throws Exception {
+	private ItemTypeInterface chooseSubscriptionType() throws Exception {
 		
-		TypeInterface type = SubscriptionType.NULL;
+		ItemTypeInterface type = SubscriptionType.NULL;
 		while (type == SubscriptionType.NULL) {
 			printSubscriptionTypes();
 			int typeChoice = Input.getNumberInRange(1, SubscriptionType.getLastIndex());
@@ -304,7 +307,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
 			if (!type.equals(TicketType.NULL))
 				System.out.println(type.getIndex() + ". " + type.getName() + ":\t" + type.getPrice() + " ILS");
 		}
-		for (TypeInterface type : TicketType.getCustomTypes()) {
+		for (ItemTypeInterface type : TicketType.getCustomTypes()) {
 				System.out.println(type.getIndex() + ". " + type.getName() + ":\t" + type.getPrice() + " ILS");
 		}
 	}
@@ -314,7 +317,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
 			if (!type.equals(SubscriptionType.NULL))
 				System.out.println(type.getIndex()+ ". " +type.getName() + ": \t" + type.getPrice() + " ILS");
 		}
-		for (TypeInterface type : SubscriptionType.getCustomTypes()) {
+		for (ItemTypeInterface type : SubscriptionType.getCustomTypes()) {
 				System.out.println(type.getIndex()+ ". " +type.getName() + ": \t" + type.getPrice() + " ILS");
 		}
 	}
@@ -439,7 +442,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
 		
 		int oldPrice = 0;
 		int newPrice = 0;
-		TypeInterface type = null;
+		ItemTypeInterface type = null;
 		
 		System.out.println("Choose item:");
 		System.out.println("0. Return to main menu");
@@ -541,7 +544,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
 	private void removeSubscriptionType() {
 		printCustomSubscriptionTypes();
 		int typeIndex = chooseCustomType(SubscriptionType.getCustomTypes());
-		TypeInterface type = SubscriptionType.getType(typeIndex);
+		ItemTypeInterface type = SubscriptionType.getType(typeIndex);
 		if(SubscriptionType.getCustomTypes().remove(type)) {
 			System.out.println("Subscription: " + type.getName() + " removed successfully");
 			NotificationService.getService().notify(Event.WORKER_MESSAGE,workerLoggedIn.getUsername() + "removed Subscription: " + type.getName());
@@ -554,7 +557,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
 	private void RemoveTicketType() {
 		printCustomTicketTypes();
 		int typeIndex = chooseCustomType(TicketType.getCustomTypes());
-		TypeInterface type = TicketType.getType(typeIndex);
+		ItemTypeInterface type = TicketType.getType(typeIndex);
 		if(TicketType.getCustomTypes().remove(type)) {
 			System.out.println("Ticket: " + type.getName() + " removed successfully");
 			NotificationService.getService().notify(Event.WORKER_MESSAGE,workerLoggedIn.getUsername() + "removed Ticket: " + type.getName());
@@ -581,14 +584,14 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
 
 	private void printCustomTicketTypes() {
 		System.out.println("Choose a ticket type: ");
-		for (TypeInterface type : TicketType.getCustomTypes()) {
+		for (ItemTypeInterface type : TicketType.getCustomTypes()) {
 		   System.out.println(type.getIndex() + ". " + type.getName() + " " + type.getPrice() + " ILS");
 		}
 	}
 	
 	private void printCustomSubscriptionTypes() {
 		System.out.println("Choose a ticket type: ");
-		for (TypeInterface type : SubscriptionType.getCustomTypes()) {
+		for (ItemTypeInterface type : SubscriptionType.getCustomTypes()) {
 		   System.out.println(type.getIndex() + ". " + type.getName() + " " + type.getPrice() + " ILS");
 		}
 	}
@@ -626,7 +629,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
 	}
 
 	
-	public List<ItemAbstract> getIssuedTickets() {
+	public Set<ItemAbstract> getIssuedTickets() {
 		return issuedTickets;
 	}
 

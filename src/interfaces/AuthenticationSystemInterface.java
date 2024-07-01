@@ -1,4 +1,4 @@
-package Users.Interfaces;
+package interfaces;
 
 import java.util.List;
 

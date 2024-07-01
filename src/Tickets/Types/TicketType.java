@@ -3,7 +3,9 @@ package Tickets.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum TicketType implements TypeInterface { 
+import interfaces.ItemTypeInterface;
+
+public enum TicketType implements ItemTypeInterface { 
 	
 	NULL          (0,"Null", 		999),
 	CHILD		  (1,"Child", 		 54),
@@ -35,7 +37,7 @@ public enum TicketType implements TypeInterface {
 		return price;
 	}
 	
-	public static TypeInterface getType(String name) {
+	public static ItemTypeInterface getType(String name) {
 		for (TicketType type : TicketType.values()) {
 			if (type.name.equals(name))
 				return type;
@@ -48,7 +50,7 @@ public enum TicketType implements TypeInterface {
 		return TicketType.NULL;
 	}
 	
-	public static TypeInterface getType(int index) {
+	public static ItemTypeInterface getType(int index) {
 		for (TicketType type : TicketType.values()) {
 			if (type.index == index)
 				return type;

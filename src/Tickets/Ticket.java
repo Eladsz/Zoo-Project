@@ -2,13 +2,13 @@ package Tickets;
 
 import java.time.LocalDate;
 
-import Tickets.Types.TypeInterface;
+import interfaces.ItemTypeInterface;
 
 public class Ticket extends ItemAbstract {
 
-	private TypeInterface  	ticketType;
+	private ItemTypeInterface  	ticketType;
 
-	public Ticket(int visitorID, TypeInterface type, String selledBy) {
+	public Ticket(int visitorID, ItemTypeInterface type, String selledBy) {
 		super(visitorID, type.getPrice(), "Ticket" ,type.getName(), selledBy);
 		this.setTicketType(type);
 		this.setVisitorID(visitorID);
@@ -31,11 +31,11 @@ public class Ticket extends ItemAbstract {
 	}
 
 
-	public TypeInterface getTicketType() {
+	public ItemTypeInterface getTicketType() {
 		return ticketType;
 	}
 
-	public void setTicketType(TypeInterface type) {
+	public void setTicketType(ItemTypeInterface type) {
 		this.ticketType = type;
 		setPrice(type.getPrice());
 		this.setTypeName(type.getName());

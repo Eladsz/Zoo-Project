@@ -2,22 +2,22 @@ package Tickets;
 
 import java.time.LocalDate;
 
-import Tickets.Types.TypeInterface;
+import interfaces.ItemTypeInterface;
 
 public class Subscription extends ItemAbstract{
 	
-	private TypeInterface subscriptionType;
+	private ItemTypeInterface subscriptionType;
 	private int secondVisitorID;
 	private LocalDate expiryDate;
 
-	public Subscription(TypeInterface type, int visitorID, String selledBy) {
+	public Subscription(ItemTypeInterface type, int visitorID, String selledBy) {
 		super(visitorID, type.getPrice(), "Subscription", type.getName(), selledBy);
 		this.subscriptionType = type;
 		this.visitorID = visitorID;
 		this.expiryDate = LocalDate.now().plusYears(1);
 	}
 	
-	public Subscription(TypeInterface type, int visitorID, int secondVisitorID, String selledBy) {
+	public Subscription(ItemTypeInterface type, int visitorID, int secondVisitorID, String selledBy) {
 		this(type, visitorID, selledBy);
 		this.secondVisitorID = secondVisitorID;
 	}
@@ -36,11 +36,11 @@ public class Subscription extends ItemAbstract{
 				+ "Selled by " + getSelledBy() + "\n\n";
 	}
 
-	public TypeInterface getSubscriptionType() {
+	public ItemTypeInterface getSubscriptionType() {
 		return subscriptionType;
 	}
 
-	public void setSubscriptionType(TypeInterface subscriptionType) {
+	public void setSubscriptionType(ItemTypeInterface subscriptionType) {
 		this.subscriptionType = subscriptionType;
 		
 		setPrice(subscriptionType.getPrice());

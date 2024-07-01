@@ -4,10 +4,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import IO.Input;
-import Users.Interfaces.AuthenticationSystemInterface;
-import Users.Interfaces.MenuInterface;
+
+import InputSystem.Input;
 import Users.Visitor.VisitorManagementSystem;
+import interfaces.AuthenticationSystemInterface;
+import interfaces.MenuInterface;
 
 public class WorkersAuthenticationSystem implements AuthenticationSystemInterface, MenuInterface {
 

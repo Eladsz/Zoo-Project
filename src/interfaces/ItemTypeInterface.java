@@ -1,6 +1,6 @@
-package Tickets.Types;
+package interfaces;
 
-public interface TypeInterface {
+public interface ItemTypeInterface {
 	public String getName();
     public int  getPrice();
     public void setPrice(int newPrice);

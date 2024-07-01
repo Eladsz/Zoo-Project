@@ -1,4 +1,4 @@
-package Users.Interfaces;
+package interfaces;
 
 public interface MenuInterface {
 	public void mainMenu() throws Exception;

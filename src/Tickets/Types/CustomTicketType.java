@@ -1,6 +1,8 @@
 package Tickets.Types;
 
-public class CustomTicketType implements TypeInterface{
+import interfaces.ItemTypeInterface;
+
+public class CustomTicketType implements ItemTypeInterface{
 		private String name;
 		private int    price;
 		private final int    index;
