@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import IO.Input;
+import Tickets.ItemAbstract;
 import Tickets.Subscription;
 import Tickets.Ticket;
 import Tickets.Types.CustomTicketType;
@@ -21,20 +23,15 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
 	
 	private static 				VisitorSystemInterface _instance;
 	private Set<Visitor> 		visitors;
-	private Set<Ticket> 		tickets;
-	private Set<Ticket> 		issuedTickets;
-	private Set<Subscription> 	issuedSubscriptions;
-	private Set<Subscription> 	subscriptions;
+	private Set<ItemAbstract> 	tickets;
+	private List<ItemAbstract> 	issuedTickets;
 	private static Worker 		workerLoggedIn;
 	private String 				selledBy;
 	
 	private VisitorManagementSystem() {
 		visitors = new HashSet<Visitor>();
-		tickets = new HashSet<Ticket>();
-		issuedTickets = new HashSet<Ticket>();
-		issuedSubscriptions = new HashSet<Subscription>();
-		subscriptions = new HashSet<Subscription>();
-		
+		tickets = new HashSet<ItemAbstract>();
+		issuedTickets = new ArrayList<ItemAbstract>();
 	}
 	
 	public static synchronized VisitorSystemInterface getInstance() {
@@ -83,7 +80,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
 			
 		
 		subscription.setAlreadyUsed(true);
-		return issuedSubscriptions.add(subscription);
+		return issuedTickets.add(subscription);
 	}
 	
 	@Override
@@ -117,7 +114,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
 			else
 				subscription = new Subscription(type, visitor.getId(), selledBy);
 			
-			return subscriptions.add(subscription);
+			return tickets.add(subscription);
 		}
 
 		return true;
@@ -150,7 +147,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
     @Override
 	public Ticket findTicketByVisitorID(int visitorID) {
     	Ticket ticket = null;
-    	for (Ticket t : tickets) {
+    	for (Ticket t : getTickets()) {
     		if (t.getVisitorID() == visitorID) {
     			if(t.isAvailable())
     				return t;
@@ -165,20 +162,20 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
     
 	public Subscription findSubscriptionByVisitorID(int visitorID) {
     	
-    	for (Subscription s : subscriptions) {
-    		if (s.getVisitorID() == visitorID || s.getSecondVisitorID() == visitorID)
-    			return s;
+    	for (Subscription s : getSubscriptions()) {
+        		if (s.getVisitorID() == visitorID || ((Subscription)s).getSecondVisitorID() == visitorID)
+        			return s;
     	}
     	return null;
     	
     }
     
 	public List<Ticket> getTickets() {
-		return tickets.stream().toList();
+		return tickets.stream().filter(ticket -> ticket instanceof Ticket).map(ticket->(Ticket)ticket).collect(Collectors.toList());
 	}
 
 	public List<Subscription> getSubscriptions() {
-		return subscriptions.stream().toList();
+		return tickets.stream().filter(subscribe -> subscribe instanceof Subscription).map(subscribe->(Subscription)subscribe).collect(Collectors.toList());
 	}
 
 	public Ticket getLastPurchasedTicket() {
@@ -250,12 +247,12 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
 	public String getPurchaseHistory(int visitorID, LocalDate purchaseDate) {
 		List<String> purchaseHistory = new ArrayList<String>();
 		StringBuilder sb = new StringBuilder();
-		for (Ticket t : tickets) {
+		for (Ticket t : getTickets()) {
 			if (t.getVisitorID() == visitorID && t.getPurchaseDate().equals(purchaseDate))
 				purchaseHistory.add(t.toString());
 		}
 		
-		for (Subscription s : subscriptions) {
+		for (Subscription s : getSubscriptions()) {
 			if ((s.getVisitorID() == visitorID || s.getSecondVisitorID() == visitorID) && s.getPurchaseDate().equals(purchaseDate))
 				purchaseHistory.add(s.toString());
 		}
@@ -603,13 +600,10 @@ public class VisitorManagementSystem implements VisitorSystemInterface, MenuInte
 	}
 
 	
-	public Set<Ticket> getIssuedTickets() {
+	public List<ItemAbstract> getIssuedTickets() {
 		return issuedTickets;
 	}
 
-	public Set<Subscription> getIssuedSubscriptions() {
-		return issuedSubscriptions;
-	}
 	
 
 }
