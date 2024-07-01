@@ -1,0 +1,3 @@
+Know bugs:
+
+1. When trying to run main there is an error, try to run again a couple of time until it starts. - from previous course (No need to handle it).
