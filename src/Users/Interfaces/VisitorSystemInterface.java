@@ -13,7 +13,7 @@ public interface VisitorSystemInterface {
 	boolean cancelTicket() throws Exception;
 	boolean cancelSubscription() throws Exception;
 	String getPurchaseHistory(int visitorID, LocalDate date);
-	void updateItem() throws Exception;
+	void updateItemPrice() throws Exception;
 	void removeItem();
 	void AddNewItem() throws Exception;
 

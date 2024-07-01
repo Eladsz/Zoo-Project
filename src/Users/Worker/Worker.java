@@ -2,6 +2,9 @@ package Users.Worker;
 
 import java.time.LocalDate;
 
+import NotificationSystem.Event;
+import NotificationSystem.MobileAppListener;
+import NotificationSystem.NotificationService;
 import Users.Abstracts.Person;
 
 public class Worker extends Person{
@@ -14,6 +17,10 @@ public class Worker extends Person{
 		super(id, firstName, lastName, birthDate, phoneNumber);
 		this.workerId = WorkerIDGenerator.getInstance().getID();
 		account = new Account(username, password);
+		NotificationService.getService().subscribe(Event.WORKER_MESSAGE, new MobileAppListener(username));
+		NotificationService.getService().subscribe(Event.NEW_ITEM, new MobileAppListener(username));
+		NotificationService.getService().subscribe(Event.SALE, new MobileAppListener(username));
+		NotificationService.getService().subscribe(Event.ITEM_UPDATE, new MobileAppListener(username));
 		
 	}
 	
