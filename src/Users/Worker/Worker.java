@@ -10,13 +10,15 @@ import Users.Abstracts.Person;
 public class Worker extends Person{
 
 	private final int workerId;
-	private Account account;
+	private String username;
+	private String password;
 
 
 	public Worker(int id, String firstName, String lastName, LocalDate birthDate, String phoneNumber, String username, String password) {
 		super(id, firstName, lastName, birthDate, phoneNumber);
 		this.workerId = WorkerIDGenerator.getInstance().getID();
-		account = new Account(username, password);
+		this.username = username;
+		this.password = password;
 		NotificationService.getService().subscribe(Event.WORKER_MESSAGE, new MobileAppListener(username));
 		NotificationService.getService().subscribe(Event.NEW_ITEM, new MobileAppListener(username));
 		NotificationService.getService().subscribe(Event.SALE, new MobileAppListener(username));
@@ -30,23 +32,34 @@ public class Worker extends Person{
 	}
 	
 	public String getUsername() {
-		return account.getUsername();
+		return username;
 	}
 	
 	public boolean changePassowrd(String username, String NewPassword, String oldPassword) {
-		return account.setPassword(username, oldPassword, NewPassword);
+		if(validateUsernameAndPassowrd(username, oldPassword)) {
+			this.password = NewPassword;
+			return true;
+		}
+		
+		return false;
+			
 	}
 	
 	public boolean changeUsername(String username, String password, String newUsername) {
-		return account.setUsername(username, password, newUsername);
+		if  (validateUsernameAndPassowrd(username, newUsername)) {			
+			this.username = newUsername;
+			return true;
+		}
+		return false;
 	}
 	
-	public boolean authenticate(String username, String password) {
-		return account.authenticate(username, password);
-	}
 	
-	public Account getAccount() {
-		return account;
+	
+	public boolean validateUsernameAndPassowrd(String username, String passowrd) {
+		if(this.username.equals(username) && this.password.equals(passowrd)) {			
+			return true;
+		}
+		return false;
 	}
 
 
