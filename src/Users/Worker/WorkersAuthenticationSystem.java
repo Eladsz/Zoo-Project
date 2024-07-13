@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import InputSystem.Input;
+import UserInput.Input;
 import Users.Visitor.VisitorManagementSystem;
 import interfaces.AuthenticationSystemInterface;
 import interfaces.MenuInterface;

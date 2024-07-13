@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import InputSystem.Input;
 import NotificationSystem.Event;
 import NotificationSystem.NotificationService;
 import Tickets.ItemAbstract;
@@ -16,6 +15,7 @@ import Tickets.Ticket;
 import Tickets.Types.CustomTicketType;
 import Tickets.Types.SubscriptionType;
 import Tickets.Types.TicketType;
+import UserInput.Input;
 import Users.Worker.Worker;
 import interfaces.MenuInterface;
 import interfaces.ItemTypeInterface;
