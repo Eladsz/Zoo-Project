@@ -4,13 +4,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import UserInput.Input;
+import UI.Input;
+import UI.Menus.MenuFactory;
+import UI.Menus.MenuFactory.MenuType;
 import Users.Visitor.VisitorManagementSystem;
 import interfaces.AuthenticationSystemInterface;
-import interfaces.MenuInterface;
 
-public class WorkersAuthenticationSystem implements AuthenticationSystemInterface, MenuInterface {
+public class WorkersAuthenticationSystem implements AuthenticationSystemInterface {
 
 	private List<Worker> workers;
 	private static WorkersAuthenticationSystem _instance;
@@ -27,67 +27,20 @@ public class WorkersAuthenticationSystem implements AuthenticationSystemInterfac
 		}
 		return _instance;
 	}
-	
+
 	@Override
-	public void mainMenu() throws Exception {
-		
-		printMenu();
-		int choice = getMainMenuChoice();
-		
-		switch (choice) {
-			case 1: {
-				createNewAccount();
-				mainMenu();
-				break;
-			}
-			case 2:{
-				Worker worker = login(Input.getString("Enter your username:"), Input.getString("Enter your password:"));
-				if(worker != null) {
-					((VisitorManagementSystem) VisitorManagementSystem.getInstance()).setWorkerLoggedIn(worker);
-					 ((MenuInterface) VisitorManagementSystem.getInstance()).mainMenu();
-				}
-					
-				mainMenu();
-			 break;
-			}
-			case 0:{
-				exit();
-				return;
-			}
-			default: {
-				System.out.println("Back to main menu:");
-				mainMenu();
-			}
-			
+	public void Login() {
+		Worker worker = validateWorker(Input.getString("Enter your username:"), Input.getString("Enter your password:"));
+		if(worker != null) {
+			((VisitorManagementSystem) VisitorManagementSystem.getInstance()).setWorkerLoggedIn(worker);
+			MenuFactory.getMenu(MenuType.MAIN).mainMenu();
 		}
-		
 	}
 
-	@Override
-	public void printMenu() {
-		System.out.println("0. Back");
-		System.out.println("1. Create new worker account");
-		System.out.println("2. Log-in");
-		System.out.println("Please Enter your choice: ");
-	}
-
-	private int getMainMenuChoice() {
-		int choice = -1;
-		
-		while (choice == -1) {
-			try {
-				choice = Input.getNumberInRange(0, 2);
-			} catch (Exception e) {
-				
-				e.printStackTrace();
-			}
-		}
-		return choice;
-	}
 
 
 	@Override
-	public Worker login(String username, String password) {
+	public Worker validateWorker(String username, String password) {
 		if (isUsernameAlreadyExists(username))
 		{
 		    for (Worker w : workers) {
@@ -103,13 +56,6 @@ public class WorkersAuthenticationSystem implements AuthenticationSystemInterfac
 		return null;
 	}
 
-
-	@Override
-	public void exit() {
-      System.out.println();
-      System.out.println("Back to main menu");
-      System.out.println();
-	}
 
 	@Override
 	public boolean isUsernameAlreadyExists(String username) {
@@ -132,8 +78,10 @@ public class WorkersAuthenticationSystem implements AuthenticationSystemInterfac
 	}
 
 	@Override
-	public void createNewAccount() throws Exception {
+	public void createNewAccount() {
 		int id = enterWorkerID();
+		if (id == 0)
+			return;
 		String firstName = Input.getName("First Name");
 		String lastName = Input.getName("Last Name");
 		LocalDate birthDate = Input.getPastDate("Birthdate");
@@ -163,7 +111,7 @@ public class WorkersAuthenticationSystem implements AuthenticationSystemInterfac
 		return username;
 	}
 
-	private int enterWorkerID() throws Exception {
+	private int enterWorkerID() {
 		boolean exist = true;
 		int id = 0;
 		while (exist) {
@@ -173,12 +121,12 @@ public class WorkersAuthenticationSystem implements AuthenticationSystemInterfac
 				exist = false;
 			else
 			{
-				System.out.print("ID is already exist.");
-				System.out.print("0. Back");
-				System.out.print("1. Retry");
+				System.out.println("ID is already exist.");
+				System.out.println("0. Back");
+				System.out.println("1. Retry");
 				int choise = Input.getNumberInRange(0, 1);
 				if (choise == 0)
-					mainMenu();
+					return choise;
 			}	
 		}
 		return id;

@@ -3,6 +3,8 @@ package Tickets.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import UI.Input;
+import UI.Output;
 import interfaces.ItemTypeInterface;
 
 public enum SubscriptionType implements ItemTypeInterface{
@@ -103,6 +105,44 @@ public enum SubscriptionType implements ItemTypeInterface{
 		this.name = newName;
 		
 	}
+	
+	public static ItemTypeInterface chooseSubscriptionType()  {
+		
+		ItemTypeInterface type = SubscriptionType.NULL;
+		while (type == SubscriptionType.NULL) {
+			Output.printSubscriptionTypes();
+			int typeChoice = Input.getNumberInRange(1, SubscriptionType.getLastIndex());
+			type = SubscriptionType.getType(typeChoice);
+			if (type != SubscriptionType.NULL)
+				System.out.println("Ticket type: "+ type.getName() + " Price: "+ type.getPrice() + " ILS");
+		}
+		
+		return type;
+	}
+	
+	public static void printCustomSubscriptionTypes() {
+		System.out.println("Choose a ticket type: ");
+		for (ItemTypeInterface type : SubscriptionType.getCustomTypes()) {
+		   System.out.println(type.getIndex() + ". " + type.getName() + " " + type.getPrice() + " ILS");
+		}
+	}
+	
+	public static int chooseCustomType()  {
+		int lastIndex = customTypes.size() -1;
+		int choice = -1;
+		while (choice == -1) {
+			try {
+				choice = Input.getNumberInRange(customTypes.get(0).getIndex(), customTypes.get(lastIndex).getIndex());
+				return choice;
+			}
+			catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return choice;
+	}
+	
 
 	
 	

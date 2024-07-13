@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import UI.Menus.MenuFactory;
+import UI.Menus.MenuFactory.MenuType;
 import Users.Worker.WorkersAuthenticationSystem;
 import abstract_classes.*;
 import animals.*;
@@ -92,8 +94,8 @@ public class ZooAplication {
 
 	}
 
-	public static void workerAuthentication(WorkersAuthenticationSystem workerAuthentication) throws Exception {
-					workerAuthentication.mainMenu();
+	public static void workerAuthentication(WorkersAuthenticationSystem workerAuthentication) {
+					MenuFactory.getMenu(MenuType.LOGIN).mainMenu();
 	}
 
 	public static void mainManeuPrint() {

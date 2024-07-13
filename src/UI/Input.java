@@ -1,4 +1,4 @@
-package UserInput;
+package UI;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +10,7 @@ public class Input {
 	
 	static Scanner scan = new Scanner(System.in);
 
-    public static String getPhoneNumber() throws Exception {
+    public static String getPhoneNumber() {
     	final String PHONE_PATTERN = "^[0-9]+$";
         String phoneNumber = "";
         boolean rep;
@@ -26,7 +26,7 @@ public class Input {
         return phoneNumber;
     }
 	
-    public static String getName(String fieldName) throws Exception {
+    public static String getName(String fieldName) {
         String name = "";
         final String NAME_PATTERN = "^[a-zA-Z ]+$";
         boolean rep;
@@ -42,7 +42,7 @@ public class Input {
         return name;
     }
 	
-	public static int getInt() throws Exception { 
+	public static int getInt() { 
 		
 		int number = 0;
 		boolean rep;
@@ -62,7 +62,7 @@ public class Input {
 		return number;
 	}
 	
-	public static int getNumberInRange(int from, int to) throws Exception {
+	public static int getNumberInRange(int from, int to) {
 		int num = 0;
 		boolean rep;
 		do {
@@ -89,7 +89,7 @@ public class Input {
 		return num;
 	}
 	
-	public static int getNumberInRange(int from, int to, String msg) throws Exception {
+	public static int getNumberInRange(int from, int to, String msg) {
 		int num = 0;
 		boolean rep;
 		do {
@@ -117,7 +117,7 @@ public class Input {
 		return num;
 	}
 	
-    public static int getIDFromUser() throws Exception {
+    public static int getIDFromUser() {
         int num = 0;
         boolean rep;
         do {
@@ -146,7 +146,7 @@ public class Input {
         return num;
     }
     
-    public static LocalDate getPastDate(String description) throws Exception {
+    public static LocalDate getPastDate(String description) {
         LocalDate birthdate = null;
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         boolean rep;
@@ -173,7 +173,7 @@ public class Input {
         return birthdate;
     }
     
-    public static LocalDate getTicketDate() throws Exception {
+    public static LocalDate getTicketDate() {
         LocalDate date = null;
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         boolean rep;

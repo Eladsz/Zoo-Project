@@ -3,6 +3,8 @@ package Tickets.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import UI.Input;
+import UI.Output;
 import interfaces.ItemTypeInterface;
 
 public enum TicketType implements ItemTypeInterface { 
@@ -90,6 +92,44 @@ public enum TicketType implements ItemTypeInterface {
 	@Override
 	public void setName(String newName) {
 		this.name = newName;
+	}
+	
+	public static ItemTypeInterface chooseTicketType() {
+		
+		ItemTypeInterface type = TicketType.NULL;
+		
+		while (type == TicketType.NULL) {
+			Output.printTicketTypes();
+			int typeChoice = Input.getNumberInRange(1, TicketType.getLastIndex());
+			type = TicketType.getType(typeChoice);
+			if (type != TicketType.NULL)
+				System.out.println("Ticket type: "+ type.getName() + " Price: "+ type.getPrice() + " ILS");
+		}
+		
+		return type;
+	}
+	
+	public static void printCustomTicketTypes() {
+		System.out.println("Choose a ticket type: ");
+		for (ItemTypeInterface type : TicketType.getCustomTypes()) {
+		   System.out.println(type.getIndex() + ". " + type.getName() + " " + type.getPrice() + " ILS");
+		}
+	}
+	
+	public static int chooseCustomType()  {
+		int lastIndex = customTypes.size() -1;
+		int choice = -1;
+		while (choice == -1) {
+			try {
+				choice = Input.getNumberInRange(customTypes.get(0).getIndex(), customTypes.get(lastIndex).getIndex());
+				return choice;
+			}
+			catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+
+		return choice;
 	}
 
 }

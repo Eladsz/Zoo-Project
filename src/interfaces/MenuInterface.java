@@ -1,7 +1,7 @@
 package interfaces;
 
 public interface MenuInterface {
-	public void mainMenu() throws Exception;
+	public void mainMenu();
 	public void exit();
-	public void printMenu() ;
+	public void display() ;
 }
