@@ -91,7 +91,7 @@ public class WorkersAuthenticationSystem implements AuthenticationSystemInterfac
 		if (isUsernameAlreadyExists(username))
 		{
 		    for (Worker w : workers) {
-		    	if (w.authenticate(username, password)) {
+		    	if (w.validateUsernameAndPassowrd(username, password)) {
 		    		System.out.println("Hello, " + w.getFirstName() + " You are logged in!");
 		    		return w;
 		    	}
@@ -103,12 +103,6 @@ public class WorkersAuthenticationSystem implements AuthenticationSystemInterfac
 		return null;
 	}
 
-	@Override
-	public List<Account> getAccounts() {
-		if (workers != null && workers.size() > 0)
-			return workers.stream().map(Worker::getAccount).collect(Collectors.toList());
-		return null;
-	}
 
 	@Override
 	public void exit() {
