@@ -6,6 +6,9 @@ import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import UI.Logger.LogLevel;
+import UI.Logger.Logger;
+
 public class Input {
 	
 	static Scanner scan = new Scanner(System.in);
@@ -16,11 +19,11 @@ public class Input {
         boolean rep;
         do {
             rep = false;
-            System.out.print("Enter your phone number: ");
+            Logger.log("Enter your phone number: ");
             phoneNumber = scan.nextLine();
             if (!phoneNumber.matches(PHONE_PATTERN)) {
                 rep = true;
-                System.out.print("Error: The phone number must contain only digits\nTry Again: ");
+                Logger.log("Error: The phone number must contain only digits\nTry Again: ", LogLevel.ERROR);
             }
         } while (rep);
         return phoneNumber;
@@ -32,11 +35,11 @@ public class Input {
         boolean rep;
         do {
             rep = false;
-            System.out.print("Enter your "+ fieldName + ": ");
+            Logger.log("Enter your "+ fieldName + ": ");
             name = scan.nextLine();
             if (!name.matches(NAME_PATTERN)) {
                 rep = true;
-                System.out.print("Error: The name must contain only alphabetic characters and spaces\nTry Again: ");
+                Logger.log("Error: The name must contain only alphabetic characters and spaces\nTry Again: ",LogLevel.ERROR);
             }
         } while (rep);
         return name;
@@ -52,10 +55,10 @@ public class Input {
 				number = scan.nextInt();
 			} catch (InputMismatchException ex) { 
 				rep = true;
-				System.out.print("Error: The input must be an Integer\nTry Again: ");
+				Logger.log("Error: The input must be an Integer\nTry Again: ");
 				scan.nextLine();
 			} catch (Exception ex) {
-				System.out.println(ex.getMessage());
+				Logger.log(ex.getMessage(),LogLevel.ERROR);
 			}
 		} while (rep);
 		scan.nextLine();
@@ -73,15 +76,15 @@ public class Input {
 				if (num < from || num > to) {
 					rep = true;
 					scan.nextLine();
-					System.out.println("Error: number out of range, you have to choose a number between "+ from + " - " + to + "\nTry Again: ");
+					Logger.log("Error: number out of range, you have to choose a number between "+ from + " - " + to + "\nTry Again: ",LogLevel.ERROR);
 				}
 				
 			} catch(InputMismatchException ex) {
 				rep = true;
-				System.out.print("Error: The input must be an Integer\nTry Again: ");
+				Logger.log("Error: The input must be an Integer\nTry Again: ");
 				scan.nextLine();
 			} catch (Exception ex) {
-				System.out.println(ex.getMessage());
+				Logger.log(ex.getMessage(),LogLevel.ERROR);
 			}
 			
 		}while (rep);
@@ -93,7 +96,7 @@ public class Input {
 		int num = 0;
 		boolean rep;
 		do {
-			System.out.print(msg + ": ");
+			Logger.log(msg + ": ");
 			rep = false;
 			try {
 				num = scan.nextInt();
@@ -101,15 +104,15 @@ public class Input {
 				if (num < from || num > to) {
 					rep = true;
 					scan.nextLine();
-					System.out.println("Error: number out of range, you have to choose a number between "+ from + " - " + to + "\nTry Again: ");
+					Logger.log("Error: number out of range, you have to choose a number between "+ from + " - " + to + "\nTry Again: ",LogLevel.ERROR);
 				}
 				
 			} catch(InputMismatchException ex) {
 				rep = true;
-				System.out.print("Error: The input must be an Integer\nTry Again: ");
+				Logger.log("Error: The input must be an Integer\nTry Again: ");
 				scan.nextLine();
 			} catch (Exception ex) {
-				System.out.println(ex.getMessage());
+				Logger.log(ex.getMessage(),LogLevel.ERROR);
 			}
 			
 		}while (rep);
@@ -122,7 +125,7 @@ public class Input {
         boolean rep;
         do {
             rep = false;
-            System.out.print("Enter your ID (a 9-digit number): ");
+            Logger.log("Enter your ID (a 9-digit number): ");
             try {
                 num = scan.nextInt();
                 
@@ -130,15 +133,15 @@ public class Input {
                 if (String.valueOf(num).length() != 9) {
                     rep = true;
                     scan.nextLine(); // Clear the buffer
-                    System.out.print("Error: The number must have exactly 9 digits\nTry Again: ");
+                    Logger.log("Error: The number must have exactly 9 digits\nTry Again: ", LogLevel.ERROR);
                 }
                 
             } catch (InputMismatchException ex) {
                 rep = true;
-                System.out.print("Error: The input must be an Integer\nTry Again: ");
+                Logger.log("Error: The input must be an Integer\nTry Again: ");
                 scan.nextLine(); // Clear the buffer
             } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+                Logger.log(ex.getMessage(),LogLevel.ERROR);
             }
             
         } while (rep);
@@ -152,21 +155,21 @@ public class Input {
         boolean rep;
         do {
             rep = false;
-            System.out.print("Enter your "+ description + " (dd-MM-yyyy): ");
+            Logger.log("Enter your "+ description + " (dd-MM-yyyy): ");
             String input = scan.nextLine();
             try {
                 birthdate = LocalDate.parse(input, formatter);
                 if (birthdate.getYear() > LocalDate.now().getYear())
                 {
-                	System.out.print("Error: Invalid date. Please Try Again:\n");
+                	Logger.log("Error: Invalid date. Please Try Again:\n");
                 	rep = true;
                 }
                 
             } catch (DateTimeParseException ex) {
                 rep = true;
-                System.out.print("Error: The input must be a valid date in the format dd-MM-yyyy. Please Try Again: ");
+                Logger.log("Error: The input must be a valid date in the format dd-MM-yyyy. Please Try Again: ");
             } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+                Logger.log(ex.getMessage(),LogLevel.ERROR);
             }
             
         } while (rep);
@@ -179,21 +182,21 @@ public class Input {
         boolean rep;
         do {
             rep = false;
-            System.out.print("Enter the ticket's date (dd-MM-yyyy): ");
+            Logger.log("Enter the ticket's date (dd-MM-yyyy): ");
             String input = scan.nextLine();
             try {
                 date = LocalDate.parse(input, formatter);
                 if (date.getYear() < LocalDate.now().getYear())
                 {
-                	System.out.print("Error: Invalid date. Please Try Again:");
+                	Logger.log("Error: Invalid date. Please Try Again:");
                 	rep = true;
                 }
                 
             } catch (DateTimeParseException ex) {
                 rep = true;
-                System.out.print("Error: The input must be a valid date in the format dd-MM-yyyy. Please Try Again: ");
+                Logger.log("Error: The input must be a valid date in the format dd-MM-yyyy. Please Try Again: ");
             } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+                Logger.log(ex.getMessage(),LogLevel.ERROR);
             }
             
         } while (rep);
@@ -211,10 +214,10 @@ public class Input {
 				val = scan.nextBoolean();
 			} catch (InputMismatchException ex) {
 				rep = true;
-				System.out.print("Error: invalid input\nPlease Enter 'True' or 'False':");
+				Logger.log("Error: invalid input\nPlease Enter 'True' or 'False':");
 				scan.nextLine();
 			} catch (Exception ex) {
-				System.out.println(ex.getMessage());
+				Logger.log(ex.getMessage(), LogLevel.ERROR);
 			}
 		} while (rep);
 		
@@ -223,12 +226,12 @@ public class Input {
 	
     
     public static String getString(String prompt) {
-        System.out.print(prompt);
+        Logger.log(prompt);
         return scan.nextLine();
     }
     
 	public static String getTicketType() {
-		System.out.println("Please enter the ticket type:");
+		Logger.log("Please enter the ticket type:");
         String type = scan.nextLine().trim().toLowerCase();
         if (type.isEmpty()) {
             return "";

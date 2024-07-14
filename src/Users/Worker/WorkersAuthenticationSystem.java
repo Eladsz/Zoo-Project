@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import UI.Input;
+import UI.Logger.LogLevel;
+import UI.Logger.Logger;
 import UI.Menus.MenuFactory;
 import UI.Menus.MenuFactory.MenuType;
 import Users.Visitor.VisitorManagementSystem;
@@ -45,14 +47,14 @@ public class WorkersAuthenticationSystem implements AuthenticationSystemInterfac
 		{
 		    for (Worker w : workers) {
 		    	if (w.validateUsernameAndPassowrd(username, password)) {
-		    		System.out.println("Hello, " + w.getFirstName() + " You are logged in!");
+		    		Logger.log("Hello, " + w.getFirstName() + " You are logged in!");
 		    		return w;
 		    	}
 		    		
 		    }
 		}
 		else
-			System.out.println("This username is not found please try again");
+			Logger.log("This username is not found please try again", LogLevel.ERROR);
 		return null;
 	}
 
@@ -91,9 +93,9 @@ public class WorkersAuthenticationSystem implements AuthenticationSystemInterfac
 		
 		boolean successfullyCreated = workers.add(new Worker(id, firstName, lastName, birthDate, phone, username, password));
 		if (successfullyCreated)
-			System.out.println("New worker account has been created: First name: " + firstName + " Last Name: " + lastName + " Username: "+ username);
+			Logger.log("New worker account has been created: First name: " + firstName + " Last Name: " + lastName + " Username: "+ username);
 		else 
-			System.out.println("Failed to create new worker account - please try again");
+			Logger.log("Failed to create new worker account - please try again", LogLevel.ERROR);
 
 	}
 
@@ -105,7 +107,7 @@ public class WorkersAuthenticationSystem implements AuthenticationSystemInterfac
 			username = Input.getString("Enter your username:");
 			exist = isUsernameAlreadyExists(username);
 			if (exist)
-				System.out.println("username is already exist please try another one");
+				Logger.log("username is already exist please try another one");
 		}
 		
 		return username;
@@ -115,15 +117,15 @@ public class WorkersAuthenticationSystem implements AuthenticationSystemInterfac
 		boolean exist = true;
 		int id = 0;
 		while (exist) {
-			System.out.println("Please enter your ID:");
+			Logger.log("Please enter your ID:");
 			id = Input.getIDFromUser();
 			if(!isIDAlreadyExists(id))
 				exist = false;
 			else
 			{
-				System.out.println("ID is already exist.");
-				System.out.println("0. Back");
-				System.out.println("1. Retry");
+				Logger.log("ID is already exist.");
+				Logger.log("0. Back");
+				Logger.log("1. Retry");
 				int choise = Input.getNumberInRange(0, 1);
 				if (choise == 0)
 					return choise;

@@ -5,6 +5,7 @@ import NotificationSystem.NotificationService;
 import Tickets.Types.SubscriptionType;
 import Tickets.Types.TicketType;
 import UI.Input;
+import UI.Logger.Logger;
 import interfaces.ItemTypeInterface;
 
 public class UpdateItemMenu extends Menu {
@@ -34,7 +35,7 @@ public class UpdateItemMenu extends Menu {
 
 		newPrice = Input.getNumberInRange(0, 1000, "Enter new ticket price");
 		type.setPrice(newPrice);
-		System.out.println("Ticket updated: " + type.getName() + " " + type.getPrice() + " ILS");
+		Logger.log("Ticket updated: " + type.getName() + " " + type.getPrice() + " ILS");
 	}
 	
 	public void updateSubscription() {
@@ -42,7 +43,7 @@ public class UpdateItemMenu extends Menu {
 		oldPrice = type.getPrice();
 		newPrice = Input.getNumberInRange(0, 1000, "Enter new ticket price");
 		type.setPrice(newPrice);
-		System.out.println("Subscription updated: " + type.getName() + " " + type.getPrice() + " ILS");
+		Logger.log("Subscription updated: " + type.getName() + " " + type.getPrice() + " ILS");
 	}
 	
 

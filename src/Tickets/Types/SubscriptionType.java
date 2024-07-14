@@ -5,6 +5,8 @@ import java.util.List;
 
 import UI.Input;
 import UI.Output;
+import UI.Logger.LogLevel;
+import UI.Logger.Logger;
 import interfaces.ItemTypeInterface;
 
 public enum SubscriptionType implements ItemTypeInterface{
@@ -114,16 +116,16 @@ public enum SubscriptionType implements ItemTypeInterface{
 			int typeChoice = Input.getNumberInRange(1, SubscriptionType.getLastIndex());
 			type = SubscriptionType.getType(typeChoice);
 			if (type != SubscriptionType.NULL)
-				System.out.println("Ticket type: "+ type.getName() + " Price: "+ type.getPrice() + " ILS");
+				Logger.log("Ticket type: "+ type.getName() + " Price: "+ type.getPrice() + " ILS");
 		}
 		
 		return type;
 	}
 	
 	public static void printCustomSubscriptionTypes() {
-		System.out.println("Choose a ticket type: ");
+		Logger.log("Choose a ticket type: ");
 		for (ItemTypeInterface type : SubscriptionType.getCustomTypes()) {
-		   System.out.println(type.getIndex() + ". " + type.getName() + " " + type.getPrice() + " ILS");
+		   Logger.log(type.getIndex() + ". " + type.getName() + " " + type.getPrice() + " ILS");
 		}
 	}
 	
@@ -136,7 +138,7 @@ public enum SubscriptionType implements ItemTypeInterface{
 				return choice;
 			}
 			catch (Exception e) {
-				System.out.println(e.getMessage());
+				Logger.log(e.getMessage(), LogLevel.ERROR);
 			}
 		}
 

@@ -10,12 +10,16 @@ import java.util.stream.Collectors;
 import NotificationSystem.Event;
 import NotificationSystem.NotificationService;
 import Tickets.ItemAbstract;
+import Tickets.ItemFactory;
 import Tickets.Subscription;
 import Tickets.Ticket;
+import Tickets.ItemFactory.ItemType;
 import Tickets.Types.SubscriptionType;
 import Tickets.Types.TicketType;
 import UI.Input;
 import UI.Output;
+import UI.Logger.LogLevel;
+import UI.Logger.Logger;
 import Users.Worker.Worker;
 import interfaces.ItemTypeInterface;
 import interfaces.VisitorSystemInterface;
@@ -27,7 +31,6 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 	private Set<ItemAbstract> 	tickets;
 	private Set<ItemAbstract> 	issuedTickets;
 	private static Worker 		workerLoggedIn;
-	private String 				selledBy;
 	
 	private VisitorManagementSystem() {
 		visitors = new HashSet<Visitor>();
@@ -50,12 +53,12 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 		}
 		
 		if(ticket.isAlreadyUsed()) {
-			System.out.println("Ticket is already used. please buy new ticket");
+			Logger.log("Ticket is already used. please buy new ticket");
 			return false;
 		}
 			
 		if(ticket.isCancelled()) {
-			System.out.println("Ticket is cancelled. please buy new ticket");
+			Logger.log("Ticket is cancelled. please buy new ticket");
 			return false;
 		}
 			
@@ -73,12 +76,12 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 		
 			
 		if(subscription.isCancelled()) {
-			System.out.println("Ticket is cancelled. please buy new ticket");
+			Logger.log("Ticket is cancelled. please buy new ticket");
 			return false;
 		}
 		
 		if(LocalDate.now().isAfter(subscription.getExpiryDate())) {
-			System.out.println("The subscription date is expired");
+			Logger.log("The subscription date is expired");
 			return false;
 		}
 			
@@ -94,8 +97,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 		
 		Visitor visitor = VisitorIdentification();
 		if(visitor != null) {
-			ItemTypeInterface type = TicketType.chooseTicketType();
-			Ticket ticket = new Ticket(visitor.getId(), type, selledBy);
+			Ticket ticket = (Ticket) ItemFactory.getItem(ItemType.Ticket, workerLoggedIn.getUsername(), visitor.getId());
 			return tickets.add(ticket);
 		}
 		return false;
@@ -107,19 +109,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 		Visitor visitor = VisitorIdentification();
 
 		if(visitor != null) {
-			Subscription subscription;
-			ItemTypeInterface type = SubscriptionType.chooseSubscriptionType();
-			
-			if (type.getName().contains("couple")) {
-				
-				Visitor secondVisitor = VisitorIdentification();
-				if (secondVisitor == null)
-					return false;
-				subscription = new Subscription(type, visitor.getId(), secondVisitor.getId(), selledBy);
-			}
-			else
-				subscription = new Subscription(type, visitor.getId(), selledBy);
-			
+			Subscription subscription = (Subscription) ItemFactory.getItem(ItemType.Subscription, workerLoggedIn.getUsername(), visitor.getId());
 			return tickets.add(subscription);
 		}
 
@@ -197,16 +187,16 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 		Subscription sub = findSubscriptionByVisitorID(id);
 		
     	if (sub == null) {
-    		System.out.println("Subscription not found");
+    		Logger.log("Subscription not found");
     		return false;
     	}
     	if(sub.isAlreadyUsed()) {
-    		System.out.println("Subscription is already used");
+    		Logger.log("Subscription is already used");
     		return false;
     	}
     	
     	if(sub.isCancelled()) {
-    		System.out.println("Subscription is already cancelled");
+    		Logger.log("Subscription is already cancelled");
     		return true;
     	}
     		
@@ -223,16 +213,16 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
     		return false;
     	}
     	    	if (ticket == null) {
-    		System.out.println("Ticket - not found");
+    		Logger.log("Ticket - not found");
     		return false;
     	}
     	if(ticket.isAlreadyUsed()) {
-    		System.out.println("Ticket is already used");
+    		Logger.log("Ticket is already used");
     		return false;
     	}
     		
     	if(ticket.isCancelled())
-    		System.out.println("Ticket is already cancelled");
+    		Logger.log("Ticket is already cancelled");
     	
     	
     	ticket.setCancelled(true);
@@ -275,7 +265,7 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 
 	
 	private boolean addNewVisitor(int id) {
-		System.out.println("New Visitor Details: ");
+		Logger.log("New Visitor Details: ");
 
 		String firstName = Input.getName("Enter your first name");
 		String lastName = Input.getName("Enter your last name");
@@ -290,12 +280,12 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 		int typeIndex = SubscriptionType.chooseCustomType();
 		ItemTypeInterface type = SubscriptionType.getType(typeIndex);
 		if(SubscriptionType.getCustomTypes().remove(type)) {
-			System.out.println("Subscription: " + type.getName() + " removed successfully");
+			Logger.log("Subscription: " + type.getName() + " removed successfully");
 			NotificationService.getService().notify(Event.WORKER_MESSAGE,workerLoggedIn.getUsername() + "removed Subscription: " + type.getName());
 		}
 			
 		else
-			System.out.println("Remove Subscription - failed");
+			Logger.log("Remove Subscription - failed");
 	}
 
 	@Override
@@ -304,11 +294,11 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 		int typeIndex = TicketType.chooseCustomType();
 		ItemTypeInterface type = TicketType.getType(typeIndex);
 		if(TicketType.getCustomTypes().remove(type)) {
-			System.out.println("Ticket: " + type.getName() + " removed successfully");
+			Logger.log("Ticket: " + type.getName() + " removed successfully");
 			NotificationService.getService().notify(Event.WORKER_MESSAGE,workerLoggedIn.getUsername() + "removed Ticket: " + type.getName());
 		}
 		else
-			System.out.println("Remove Ticket - failed");
+			Logger.log("Remove Ticket - failed", LogLevel.ERROR);
 		}
 
 
@@ -319,14 +309,8 @@ public class VisitorManagementSystem implements VisitorSystemInterface {
 
 	public void setWorkerLoggedIn(Worker workerLoggedIn) {
 		VisitorManagementSystem.workerLoggedIn = workerLoggedIn;
-		this.setSelledBySignature(workerLoggedIn.getFirstName() +" "+ workerLoggedIn.getLastName() + " Worker ID: "+ workerLoggedIn.getWorkerId());
 	}
 
-
-	public void setSelledBySignature(String selledBy) {
-
-		this.selledBy = selledBy;
-	}
 
 	
 	public Set<ItemAbstract> getIssuedTickets() {

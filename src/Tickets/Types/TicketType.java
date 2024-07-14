@@ -5,6 +5,7 @@ import java.util.List;
 
 import UI.Input;
 import UI.Output;
+import UI.Logger.Logger;
 import interfaces.ItemTypeInterface;
 
 public enum TicketType implements ItemTypeInterface { 
@@ -103,16 +104,16 @@ public enum TicketType implements ItemTypeInterface {
 			int typeChoice = Input.getNumberInRange(1, TicketType.getLastIndex());
 			type = TicketType.getType(typeChoice);
 			if (type != TicketType.NULL)
-				System.out.println("Ticket type: "+ type.getName() + " Price: "+ type.getPrice() + " ILS");
+				Logger.log("Ticket type: "+ type.getName() + " Price: "+ type.getPrice() + " ILS");
 		}
 		
 		return type;
 	}
 	
 	public static void printCustomTicketTypes() {
-		System.out.println("Choose a ticket type: ");
+		Logger.log("Choose a ticket type: ");
 		for (ItemTypeInterface type : TicketType.getCustomTypes()) {
-		   System.out.println(type.getIndex() + ". " + type.getName() + " " + type.getPrice() + " ILS");
+		   Logger.log(type.getIndex() + ". " + type.getName() + " " + type.getPrice() + " ILS");
 		}
 	}
 	
@@ -125,7 +126,7 @@ public enum TicketType implements ItemTypeInterface {
 				return choice;
 			}
 			catch (Exception e) {
-				System.out.println(e.getMessage());
+				Logger.log(e.getMessage());
 			}
 		}
 

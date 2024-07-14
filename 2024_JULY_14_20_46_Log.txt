@@ -1,0 +1,243 @@
+2024-07-14T20:46:09.796725300 : INFO : 
+2024-07-14T20:46:09.801211600 : INFO : Welcome To Our Zoo!
+2024-07-14T20:46:09.801211600 : INFO : Please Enter The Number Of Your Choice:
+2024-07-14T20:46:09.801211600 : INFO : 	1) Zoo Info.
+2024-07-14T20:46:09.801211600 : INFO : 	2) See All Penguins.
+2024-07-14T20:46:09.802211400 : INFO : 	3) Add A New Penguin.
+2024-07-14T20:46:09.802211400 : INFO : 	4) See All Predetory Animals.
+2024-07-14T20:46:09.802211400 : INFO : 	5) Add A New Predetory Animals.
+2024-07-14T20:46:09.802211400 : INFO : 	6) See All The Fish In The Aquarium.
+2024-07-14T20:46:09.805211400 : INFO : 	7) Add Fish To The Aquarium. 
+2024-07-14T20:46:09.805211400 : INFO : 	8) Feed The Animals.
+2024-07-14T20:46:09.805211400 : INFO : 	9) Listen To The Animals Voices.
+2024-07-14T20:46:09.805211400 : INFO : 	10) Move Forward A Year (Next Year).
+2024-07-14T20:46:09.806214700 : INFO : 	11) Change Penguin Sorting Strategy.
+2024-07-14T20:46:09.806214700 : INFO : 	12) The New Animals Sectione.
+2024-07-14T20:46:09.806214700 : INFO : 	13) Visitor management system.
+2024-07-14T20:46:09.806214700 : INFO : 	ENTER 0 TO EXIT.
+2024-07-14T20:46:11.846351600 : INFO : 
+
+
+*********************************
+2024-07-14T20:46:11.846351600 : INFO : Log-in Menu
+2024-07-14T20:46:11.849351300 : INFO : 0. Back
+2024-07-14T20:46:11.850351100 : INFO : 1. Create New Worker Account
+2024-07-14T20:46:11.850351100 : INFO : 2. Log-In
+2024-07-14T20:46:11.850351100 : INFO : *********************************
+2024-07-14T20:46:11.850351100 : INFO : Please choose an option:
+2024-07-14T20:46:15.654750200 : INFO : Enter your username:
+2024-07-14T20:46:17.273068400 : INFO : Enter your password:
+2024-07-14T20:46:18.133279800 : INFO : Hello, admin You are logged in!
+2024-07-14T20:46:18.139237800 : INFO : 
+
+
+*********************************
+2024-07-14T20:46:18.139237800 : INFO : Main Menu
+2024-07-14T20:46:18.139237800 : INFO : 0. Log-out
+2024-07-14T20:46:18.140238400 : INFO : 1. Buy Ticket
+2024-07-14T20:46:18.140238400 : INFO : 2. Buy Subscription
+2024-07-14T20:46:18.140238400 : INFO : 3. Cancel Ticket
+2024-07-14T20:46:18.141237700 : INFO : 4. Cancel Subscription
+2024-07-14T20:46:18.141237700 : INFO : 5. Find ticket by ID
+2024-07-14T20:46:18.141237700 : INFO : 6. Print purchase history by visitor ID & Date
+2024-07-14T20:46:18.142238 : INFO : 7. Issue Ticket
+2024-07-14T20:46:18.142238 : INFO : 8. Issue Subscriber
+2024-07-14T20:46:18.142238 : INFO : 9. Add new Item
+2024-07-14T20:46:18.143238 : INFO : 10. Remove Item
+2024-07-14T20:46:18.143238 : INFO : 11. Update Item price
+2024-07-14T20:46:18.143238 : INFO : *********************************
+2024-07-14T20:46:18.143238 : INFO : Please choose an option:
+2024-07-14T20:46:23.779888900 : INFO : Enter your ID (a 9-digit number): 
+2024-07-14T20:46:30.732542900 : ERROR : Visitor - Not found
+2024-07-14T20:46:30.732542900 : INFO : New Visitor Details: 
+2024-07-14T20:46:30.733541900 : INFO : Enter your Enter your first name: 
+2024-07-14T20:46:34.254403100 : INFO : Enter your Enter your last name: 
+2024-07-14T20:46:34.638067 : INFO : Enter your Birthdate (dd-MM-yyyy): 
+2024-07-14T20:46:39.163910100 : INFO : Enter your phone number: 
+2024-07-14T20:46:45.107401300 : INFO : Create new Visitor done successfully
+
+2024-07-14T20:46:45.114398900 : INFO : 1. Child:	54 ILS
+2024-07-14T20:46:45.114398900 : INFO : 2. Adult:	71 ILS
+2024-07-14T20:46:45.115425300 : INFO : 3. Senior:	54 ILS
+2024-07-14T20:46:45.115425300 : INFO : 4. Police:	54 ILS
+2024-07-14T20:46:45.115425300 : INFO : 5. Soldier:	54 ILS
+2024-07-14T20:46:45.116423400 : INFO : 6. Student:	54 ILS
+2024-07-14T20:46:45.116423400 : INFO : 7. Disabled:	35 ILS
+2024-07-14T20:46:48.070933800 : INFO : Ticket type: Senior Price: 54 ILS
+2024-07-14T20:46:48.083932600 : INFO : Ticket purchasing done successfully
+
+
+ticket ID: 1
+visitor ID: 111111111
+price: 54
+purchase Date: 2024-07-14
+ticket Type: Senior
+is already used? false
+is cancelled? false
+Selled by admin
+
+
+2024-07-14T20:46:48.083932600 : INFO : 
+
+
+*********************************
+2024-07-14T20:46:48.083932600 : INFO : Main Menu
+2024-07-14T20:46:48.083932600 : INFO : 0. Log-out
+2024-07-14T20:46:48.083932600 : INFO : 1. Buy Ticket
+2024-07-14T20:46:48.083932600 : INFO : 2. Buy Subscription
+2024-07-14T20:46:48.084931800 : INFO : 3. Cancel Ticket
+2024-07-14T20:46:48.084931800 : INFO : 4. Cancel Subscription
+2024-07-14T20:46:48.084931800 : INFO : 5. Find ticket by ID
+2024-07-14T20:46:48.084931800 : INFO : 6. Print purchase history by visitor ID & Date
+2024-07-14T20:46:48.084931800 : INFO : 7. Issue Ticket
+2024-07-14T20:46:48.084931800 : INFO : 8. Issue Subscriber
+2024-07-14T20:46:48.085931900 : INFO : 9. Add new Item
+2024-07-14T20:46:48.085931900 : INFO : 10. Remove Item
+2024-07-14T20:46:48.085931900 : INFO : 11. Update Item price
+2024-07-14T20:46:48.085931900 : INFO : *********************************
+2024-07-14T20:46:48.085931900 : INFO : Please choose an option:
+2024-07-14T20:46:53.079474600 : INFO : Enter your ID (a 9-digit number): 
+2024-07-14T20:46:57.144689200 : INFO : 
+
+ticket ID: 1
+visitor ID: 111111111
+price: 54
+purchase Date: 2024-07-14
+ticket Type: Senior
+is already used? false
+is cancelled? false
+Selled by admin
+
+
+2024-07-14T20:46:57.145657200 : INFO : Ticket Cancel done successfully
+
+2024-07-14T20:46:57.146657900 : INFO : 
+
+
+*********************************
+2024-07-14T20:46:57.147697700 : INFO : Main Menu
+2024-07-14T20:46:57.148689300 : INFO : 0. Log-out
+2024-07-14T20:46:57.148689300 : INFO : 1. Buy Ticket
+2024-07-14T20:46:57.149686300 : INFO : 2. Buy Subscription
+2024-07-14T20:46:57.149686300 : INFO : 3. Cancel Ticket
+2024-07-14T20:46:57.150657100 : INFO : 4. Cancel Subscription
+2024-07-14T20:46:57.150657100 : INFO : 5. Find ticket by ID
+2024-07-14T20:46:57.150657100 : INFO : 6. Print purchase history by visitor ID & Date
+2024-07-14T20:46:57.151657 : INFO : 7. Issue Ticket
+2024-07-14T20:46:57.151657 : INFO : 8. Issue Subscriber
+2024-07-14T20:46:57.151657 : INFO : 9. Add new Item
+2024-07-14T20:46:57.151657 : INFO : 10. Remove Item
+2024-07-14T20:46:57.152656800 : INFO : 11. Update Item price
+2024-07-14T20:46:57.152656800 : INFO : *********************************
+2024-07-14T20:46:57.152656800 : INFO : Please choose an option:
+2024-07-14T20:47:03.880319100 : INFO : Enter the price: 
+2024-07-14T20:47:07.225913900 : INFO : New item name: 
+2024-07-14T20:47:09.641405700 : INFO : 
+
+
+*********************************
+2024-07-14T20:47:09.642408100 : INFO : Add new item menu
+2024-07-14T20:47:09.643404200 : INFO : 0. Back
+2024-07-14T20:47:09.644407700 : INFO : 1. Add New Ticket Type
+2024-07-14T20:47:09.644407700 : INFO : 2. Add New Subscription Type
+2024-07-14T20:47:09.644407700 : INFO : *********************************
+2024-07-14T20:47:09.645403100 : INFO : Please choose an option:
+2024-07-14T20:47:12.374868100 : INFO : Add new subscription type done successfully
+
+2024-07-14T20:47:12.377872700 : DEBUG : Sending mobile notification to message to: admin concerning NEW_ITEM: New item added! eeee price: 232
+2024-07-14T20:47:12.383345400 : DEBUG : Sending SMS message to: elad sz phone: 0506251847 concerning NEW_ITEM: New item added! eeee price: 232
+2024-07-14T20:47:12.386345400 : DEBUG : Sending mobile notification to message to: admin concerning WORKER_MESSAGE: admin created new item => eeee price: 232
+2024-07-14T20:47:12.386345400 : INFO : 
+
+
+*********************************
+2024-07-14T20:47:12.387345600 : INFO : Add new item menu
+2024-07-14T20:47:12.387345600 : INFO : 0. Back
+2024-07-14T20:47:12.388345900 : INFO : 1. Add New Ticket Type
+2024-07-14T20:47:12.388345900 : INFO : 2. Add New Subscription Type
+2024-07-14T20:47:12.388345900 : INFO : *********************************
+2024-07-14T20:47:12.388345900 : INFO : Please choose an option:
+2024-07-14T20:47:16.750357100 : INFO : Exiting Add new item menu...
+2024-07-14T20:47:16.751356600 : INFO : 
+
+
+*********************************
+2024-07-14T20:47:16.752356300 : INFO : Main Menu
+2024-07-14T20:47:16.752356300 : INFO : 0. Log-out
+2024-07-14T20:47:16.753358 : INFO : 1. Buy Ticket
+2024-07-14T20:47:16.754356900 : INFO : 2. Buy Subscription
+2024-07-14T20:47:16.754356900 : INFO : 3. Cancel Ticket
+2024-07-14T20:47:16.755352500 : INFO : 4. Cancel Subscription
+2024-07-14T20:47:16.755352500 : INFO : 5. Find ticket by ID
+2024-07-14T20:47:16.755352500 : INFO : 6. Print purchase history by visitor ID & Date
+2024-07-14T20:47:16.756352600 : INFO : 7. Issue Ticket
+2024-07-14T20:47:16.756352600 : INFO : 8. Issue Subscriber
+2024-07-14T20:47:16.756352600 : INFO : 9. Add new Item
+2024-07-14T20:47:16.757353300 : INFO : 10. Remove Item
+2024-07-14T20:47:16.757353300 : INFO : 11. Update Item price
+2024-07-14T20:47:16.757353300 : INFO : *********************************
+2024-07-14T20:47:16.757353300 : INFO : Please choose an option:
+2024-07-14T20:47:19.853607400 : INFO : Enter your ID (a 9-digit number): 
+2024-07-14T20:47:22.720005400 : INFO : Enter your Purchase date (dd-MM-yyyy): 
+2024-07-14T20:47:33.161884200 : INFO : 
+
+ticket ID: 1
+visitor ID: 111111111
+price: 54
+purchase Date: 2024-07-14
+ticket Type: Senior
+is already used? false
+is cancelled? true
+Selled by admin
+
+
+
+2024-07-14T20:47:33.163882300 : INFO : 
+
+
+*********************************
+2024-07-14T20:47:33.163882300 : INFO : Main Menu
+2024-07-14T20:47:33.164883 : INFO : 0. Log-out
+2024-07-14T20:47:33.165881600 : INFO : 1. Buy Ticket
+2024-07-14T20:47:33.165881600 : INFO : 2. Buy Subscription
+2024-07-14T20:47:33.165881600 : INFO : 3. Cancel Ticket
+2024-07-14T20:47:33.166879800 : INFO : 4. Cancel Subscription
+2024-07-14T20:47:33.166879800 : INFO : 5. Find ticket by ID
+2024-07-14T20:47:33.166879800 : INFO : 6. Print purchase history by visitor ID & Date
+2024-07-14T20:47:33.167879800 : INFO : 7. Issue Ticket
+2024-07-14T20:47:33.167879800 : INFO : 8. Issue Subscriber
+2024-07-14T20:47:33.167879800 : INFO : 9. Add new Item
+2024-07-14T20:47:33.167879800 : INFO : 10. Remove Item
+2024-07-14T20:47:33.168922800 : INFO : 11. Update Item price
+2024-07-14T20:47:33.168922800 : INFO : *********************************
+2024-07-14T20:47:33.168922800 : INFO : Please choose an option:
+2024-07-14T20:47:35.980616300 : INFO : Exiting Main Menu...
+2024-07-14T20:47:35.981596800 : INFO : 
+
+
+*********************************
+2024-07-14T20:47:35.982597400 : INFO : Log-in Menu
+2024-07-14T20:47:35.982597400 : INFO : 0. Back
+2024-07-14T20:47:35.983598900 : INFO : 1. Create New Worker Account
+2024-07-14T20:47:35.984595300 : INFO : 2. Log-In
+2024-07-14T20:47:35.984595300 : INFO : *********************************
+2024-07-14T20:47:35.984595300 : INFO : Please choose an option:
+2024-07-14T20:47:36.505219 : INFO : Exiting Log-in Menu...
+2024-07-14T20:47:36.506217600 : INFO : 
+2024-07-14T20:47:36.507214800 : INFO : Welcome To Our Zoo!
+2024-07-14T20:47:36.508214900 : INFO : Please Enter The Number Of Your Choice:
+2024-07-14T20:47:36.509215500 : INFO : 	1) Zoo Info.
+2024-07-14T20:47:36.510215100 : INFO : 	2) See All Penguins.
+2024-07-14T20:47:36.510215100 : INFO : 	3) Add A New Penguin.
+2024-07-14T20:47:36.510215100 : INFO : 	4) See All Predetory Animals.
+2024-07-14T20:47:36.510215100 : INFO : 	5) Add A New Predetory Animals.
+2024-07-14T20:47:36.511212900 : INFO : 	6) See All The Fish In The Aquarium.
+2024-07-14T20:47:36.511212900 : INFO : 	7) Add Fish To The Aquarium. 
+2024-07-14T20:47:36.511212900 : INFO : 	8) Feed The Animals.
+2024-07-14T20:47:36.511212900 : INFO : 	9) Listen To The Animals Voices.
+2024-07-14T20:47:36.512213100 : INFO : 	10) Move Forward A Year (Next Year).
+2024-07-14T20:47:36.512213100 : INFO : 	11) Change Penguin Sorting Strategy.
+2024-07-14T20:47:36.512213100 : INFO : 	12) The New Animals Sectione.
+2024-07-14T20:47:36.513214300 : INFO : 	13) Visitor management system.
+2024-07-14T20:47:36.513214300 : INFO : 	ENTER 0 TO EXIT.
+2024-07-14T20:47:37.270844700 : INFO : Good Bye!!

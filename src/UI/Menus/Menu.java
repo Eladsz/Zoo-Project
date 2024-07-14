@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import UI.Input;
+import UI.Logger.LogLevel;
+import UI.Logger.Logger;
 import interfaces.MenuInterface;
 
 public abstract class Menu implements MenuInterface{
@@ -34,18 +36,18 @@ public abstract class Menu implements MenuInterface{
 	@Override
 	public void display() {
 		int i = 0;
-		System.out.println("\n\n\n*********************************");
-		System.out.println(menuName);
+		Logger.log("\n\n\n*********************************");
+		Logger.log(menuName);
 		for (String option : getOptionsNames()) {
-			System.out.println((i++) + ". " + option);
+			Logger.log((i++) + ". " + option);
 		}
-		System.out.println("*********************************");
+		Logger.log("*********************************");
 		
 	}
 	
 	@Override
 	public void exit() {
-		System.out.println("Exiting " + menuName + "...");
+		Logger.log("Exiting " + menuName + "...");
 		return;
 	}
 	
@@ -54,7 +56,7 @@ public abstract class Menu implements MenuInterface{
 		while(true) {
 
 			display();
-			System.out.println("Please choose an option:");
+			Logger.log("Please choose an option:");
 			int index = Input.getNumberInRange(0, getOptionsCount()-1);
 			String option = getOptionsNames().get(index);
 			
@@ -63,8 +65,8 @@ public abstract class Menu implements MenuInterface{
 				
 			}
 			catch (Exception e) {
-				System.out.println("ERROR: " + e.getMessage());
-				System.out.println("Please try again");
+				Logger.log("ERROR: " + e.getMessage(), LogLevel.ERROR);
+				Logger.log("Please try again",LogLevel.ERROR);
 			}
 			
 			if (index == 0)
