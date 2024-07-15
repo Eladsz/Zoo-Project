@@ -9,7 +9,9 @@ public class MenuFactory {
 		LOGIN,
 		ADD_NEW_ITEM,
 		REMOVE_ITEM,
-		UPDATE_ITEM_PRICE
+		UPDATE_ITEM_PRICE,
+		BUY_TICKET,
+		CANCEL_TICKET
 		
 	}
 	
@@ -26,6 +28,10 @@ public class MenuFactory {
 			return new RemoveItemMenu();
 		case UPDATE_ITEM_PRICE:
 			return new UpdateItemMenu();
+		case BUY_TICKET:
+			return new BuyTicketMenu();
+		case CANCEL_TICKET:
+			return new CancelTicketMenu();
 		}
 		Logger.log("ERROR: MenuFactory.getMenu() - returns null", LogLevel.ERROR);
 		return null;

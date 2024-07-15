@@ -8,10 +8,8 @@ public class MainVisitorSystemMenu extends Menu {
 
 	public MainVisitorSystemMenu() {
 		super("Main Menu", "Log-out");
-		AddOption("Buy Ticket", 									v-> Output.execute(VisitorManagementSystem.getInstance().buyTicket(), "Ticket purchasing", VisitorManagementSystem.getInstance().getLastPurchasedItem()));
-		AddOption("Buy Subscription", 								v-> Output.execute(VisitorManagementSystem.getInstance().buySubscription(), "Subscription purchasing" ,VisitorManagementSystem.getInstance().getLastPurchasedItem()));
-		AddOption("Cancel Ticket", 									v-> Output.execute(VisitorManagementSystem.getInstance().cancelTicket(), "Ticket Cancel", ""));
-		AddOption("Cancel Subscription", 							v-> Output.execute(VisitorManagementSystem.getInstance().cancelSubscription(), "Subscription Cancel", ""));
+		AddOption("Buy Ticket", 									v-> MenuFactory.getMenu(MenuType.BUY_TICKET).mainMenu());
+		AddOption("Cancel Ticket", 									v-> MenuFactory.getMenu(MenuType.CANCEL_TICKET).mainMenu());
 		AddOption("Find ticket by ID", 								v-> Output.isNull(VisitorManagementSystem.getInstance().findTicketByVisitorID(Input.getIDFromUser()), "Ticket"));
 		AddOption("Print purchase history by visitor ID & Date", 	v-> Output.isNull(VisitorManagementSystem.getInstance().getPurchaseHistory(Input.getIDFromUser(), Input.getPastDate("Purchase date")), "Purchase history"));
 		AddOption("Issue Ticket",									v-> Output.execute(VisitorManagementSystem.getInstance().issueTicket(VisitorManagementSystem.getInstance().findTicketByVisitorID(Input.getIDFromUser())), "Issue Ticket", "Enjoy your visit"));

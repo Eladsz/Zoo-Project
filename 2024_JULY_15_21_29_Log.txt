@@ -1,0 +1,255 @@
+2024-07-15T21:29:11.908663300 : INFO : 
+2024-07-15T21:29:11.913677400 : INFO : Welcome To Our Zoo!
+2024-07-15T21:29:11.914663 : INFO : Please Enter The Number Of Your Choice:
+2024-07-15T21:29:11.914663 : INFO : 	1) Zoo Info.
+2024-07-15T21:29:11.914663 : INFO : 	2) See All Penguins.
+2024-07-15T21:29:11.915662900 : INFO : 	3) Add A New Penguin.
+2024-07-15T21:29:11.915662900 : INFO : 	4) See All Predetory Animals.
+2024-07-15T21:29:11.915662900 : INFO : 	5) Add A New Predetory Animals.
+2024-07-15T21:29:11.916663100 : INFO : 	6) See All The Fish In The Aquarium.
+2024-07-15T21:29:11.916663100 : INFO : 	7) Add Fish To The Aquarium. 
+2024-07-15T21:29:11.917664600 : INFO : 	8) Feed The Animals.
+2024-07-15T21:29:11.918663100 : INFO : 	9) Listen To The Animals Voices.
+2024-07-15T21:29:11.918663100 : INFO : 	10) Move Forward A Year (Next Year).
+2024-07-15T21:29:11.918663100 : INFO : 	11) Change Penguin Sorting Strategy.
+2024-07-15T21:29:11.919664 : INFO : 	12) The New Animals Sectione.
+2024-07-15T21:29:11.919664 : INFO : 	13) Visitor management system.
+2024-07-15T21:29:11.920663500 : INFO : 	ENTER 0 TO EXIT.
+2024-07-15T21:29:13.871954600 : INFO : 
+
+
+*********************************
+2024-07-15T21:29:13.872954800 : INFO : Log-in Menu
+2024-07-15T21:29:13.875954800 : INFO : 0. Back
+2024-07-15T21:29:13.876954700 : INFO : 1. Create New Worker Account
+2024-07-15T21:29:13.876954700 : INFO : 2. Log-In
+2024-07-15T21:29:13.877955900 : INFO : *********************************
+2024-07-15T21:29:13.877955900 : INFO : Please choose an option:
+2024-07-15T21:29:15.157377600 : INFO : Enter your username:
+2024-07-15T21:29:16.492779300 : INFO : Enter your password:
+2024-07-15T21:29:17.349573400 : INFO : Hello, admin You are logged in!
+2024-07-15T21:29:17.353540200 : INFO : 
+
+
+*********************************
+2024-07-15T21:29:17.354575100 : INFO : Main Menu
+2024-07-15T21:29:17.354575100 : INFO : 0. Log-out
+2024-07-15T21:29:17.355547900 : INFO : 1. Buy Ticket
+2024-07-15T21:29:17.355547900 : INFO : 2. Cancel Ticket
+2024-07-15T21:29:17.355547900 : INFO : 3. Find ticket by ID
+2024-07-15T21:29:17.356540100 : INFO : 4. Print purchase history by visitor ID & Date
+2024-07-15T21:29:17.356540100 : INFO : 5. Issue Ticket
+2024-07-15T21:29:17.356540100 : INFO : 6. Issue Subscriber
+2024-07-15T21:29:17.357540600 : INFO : 7. Add new Item
+2024-07-15T21:29:17.357540600 : INFO : 8. Remove Item
+2024-07-15T21:29:17.357540600 : INFO : 9. Update Item price
+2024-07-15T21:29:17.358540600 : INFO : *********************************
+2024-07-15T21:29:17.358540600 : INFO : Please choose an option:
+2024-07-15T21:29:19.433811900 : INFO : 
+
+
+*********************************
+2024-07-15T21:29:19.434816600 : INFO : Buy Ticket Menu
+2024-07-15T21:29:19.434816600 : INFO : 0. Back
+2024-07-15T21:29:19.435821900 : INFO : 1. Buy Subscription
+2024-07-15T21:29:19.435821900 : INFO : 2. Buy Subscription
+2024-07-15T21:29:19.436774 : INFO : *********************************
+2024-07-15T21:29:19.436774 : INFO : Please choose an option:
+2024-07-15T21:29:41.273931 : INFO : 
+2024-07-15T21:29:41.278932700 : INFO : Welcome To Our Zoo!
+2024-07-15T21:29:41.278932700 : INFO : Please Enter The Number Of Your Choice:
+2024-07-15T21:29:41.279931900 : INFO : 	1) Zoo Info.
+2024-07-15T21:29:41.279931900 : INFO : 	2) See All Penguins.
+2024-07-15T21:29:41.279931900 : INFO : 	3) Add A New Penguin.
+2024-07-15T21:29:41.280934500 : INFO : 	4) See All Predetory Animals.
+2024-07-15T21:29:41.280934500 : INFO : 	5) Add A New Predetory Animals.
+2024-07-15T21:29:41.280934500 : INFO : 	6) See All The Fish In The Aquarium.
+2024-07-15T21:29:41.281932400 : INFO : 	7) Add Fish To The Aquarium. 
+2024-07-15T21:29:41.281932400 : INFO : 	8) Feed The Animals.
+2024-07-15T21:29:41.281932400 : INFO : 	9) Listen To The Animals Voices.
+2024-07-15T21:29:41.282932600 : INFO : 	10) Move Forward A Year (Next Year).
+2024-07-15T21:29:41.282932600 : INFO : 	11) Change Penguin Sorting Strategy.
+2024-07-15T21:29:41.282932600 : INFO : 	12) The New Animals Sectione.
+2024-07-15T21:29:41.282932600 : INFO : 	13) Visitor management system.
+2024-07-15T21:29:41.283935400 : INFO : 	ENTER 0 TO EXIT.
+2024-07-15T21:29:43.310258100 : INFO : 
+
+
+*********************************
+2024-07-15T21:29:43.310258100 : INFO : Log-in Menu
+2024-07-15T21:29:43.314259400 : INFO : 0. Back
+2024-07-15T21:29:43.315263900 : INFO : 1. Create New Worker Account
+2024-07-15T21:29:43.315263900 : INFO : 2. Log-In
+2024-07-15T21:29:43.315263900 : INFO : *********************************
+2024-07-15T21:29:43.316259500 : INFO : Please choose an option:
+2024-07-15T21:29:44.575405 : INFO : Enter your username:
+2024-07-15T21:29:45.622709600 : INFO : Enter your password:
+2024-07-15T21:29:46.300356400 : INFO : Hello, admin You are logged in!
+2024-07-15T21:29:46.306353900 : INFO : 
+
+
+*********************************
+2024-07-15T21:29:46.306353900 : INFO : Main Menu
+2024-07-15T21:29:46.307324200 : INFO : 0. Log-out
+2024-07-15T21:29:46.307324200 : INFO : 1. Buy Ticket
+2024-07-15T21:29:46.307324200 : INFO : 2. Cancel Ticket
+2024-07-15T21:29:46.308323800 : INFO : 3. Find ticket by ID
+2024-07-15T21:29:46.308323800 : INFO : 4. Print purchase history by visitor ID & Date
+2024-07-15T21:29:46.309325300 : INFO : 5. Issue Ticket
+2024-07-15T21:29:46.309325300 : INFO : 6. Issue Subscriber
+2024-07-15T21:29:46.309325300 : INFO : 7. Add new Item
+2024-07-15T21:29:46.310329 : INFO : 8. Remove Item
+2024-07-15T21:29:46.310329 : INFO : 9. Update Item price
+2024-07-15T21:29:46.310329 : INFO : *********************************
+2024-07-15T21:29:46.311325100 : INFO : Please choose an option:
+2024-07-15T21:29:49.657332300 : INFO : 
+
+
+*********************************
+2024-07-15T21:29:49.658331800 : INFO : Buy Ticket Menu
+2024-07-15T21:29:49.658331800 : INFO : 0. Back
+2024-07-15T21:29:49.659335800 : INFO : 1. Buy Ticket
+2024-07-15T21:29:49.660332600 : INFO : 2. Buy Subscription
+2024-07-15T21:29:49.660332600 : INFO : *********************************
+2024-07-15T21:29:49.661332900 : INFO : Please choose an option:
+2024-07-15T21:29:51.757757800 : INFO : Enter your ID (a 9-digit number): 
+2024-07-15T21:29:55.166215400 : ERROR : Visitor - Not found
+2024-07-15T21:29:55.166215400 : INFO : New Visitor Details: 
+2024-07-15T21:29:55.167215800 : INFO : Enter your Enter your first name: 
+2024-07-15T21:29:58.178421200 : INFO : Enter your Enter your last name: 
+2024-07-15T21:29:58.755342300 : INFO : Enter your Birthdate (dd-MM-yyyy): 
+2024-07-15T21:30:02.187398900 : INFO : Enter your phone number: 
+2024-07-15T21:30:09.121855800 : INFO : Create new Visitor done successfully
+
+2024-07-15T21:30:09.136144100 : INFO : 1. Child:	54 ILS
+2024-07-15T21:30:09.137113900 : INFO : 2. Adult:	71 ILS
+2024-07-15T21:30:09.138114300 : INFO : 3. Senior:	54 ILS
+2024-07-15T21:30:09.138114300 : INFO : 4. Police:	54 ILS
+2024-07-15T21:30:09.138114300 : INFO : 5. Soldier:	54 ILS
+2024-07-15T21:30:09.139115100 : INFO : 6. Student:	54 ILS
+2024-07-15T21:30:09.139115100 : INFO : 7. Disabled:	35 ILS
+2024-07-15T21:30:10.678168700 : INFO : Ticket type: Adult Price: 71 ILS
+2024-07-15T21:30:10.695169100 : INFO : Ticket purchasing done successfully
+
+
+ticket ID: 1
+visitor ID: 111111111
+price: 71
+purchase Date: 2024-07-15
+ticket Type: Adult
+is already used? false
+is cancelled? false
+Selled by admin
+
+
+2024-07-15T21:30:10.695169100 : INFO : 
+
+
+*********************************
+2024-07-15T21:30:10.696170300 : INFO : Buy Ticket Menu
+2024-07-15T21:30:10.696170300 : INFO : 0. Back
+2024-07-15T21:30:10.697172300 : INFO : 1. Buy Ticket
+2024-07-15T21:30:10.697172300 : INFO : 2. Buy Subscription
+2024-07-15T21:30:10.697172300 : INFO : *********************************
+2024-07-15T21:30:10.698170300 : INFO : Please choose an option:
+2024-07-15T21:30:19.219258700 : INFO : Exiting Buy Ticket Menu...
+2024-07-15T21:30:19.219258700 : INFO : 
+
+
+*********************************
+2024-07-15T21:30:19.220259800 : INFO : Main Menu
+2024-07-15T21:30:19.220259800 : INFO : 0. Log-out
+2024-07-15T21:30:19.220259800 : INFO : 1. Buy Ticket
+2024-07-15T21:30:19.221259600 : INFO : 2. Cancel Ticket
+2024-07-15T21:30:19.221259600 : INFO : 3. Find ticket by ID
+2024-07-15T21:30:19.221259600 : INFO : 4. Print purchase history by visitor ID & Date
+2024-07-15T21:30:19.222258900 : INFO : 5. Issue Ticket
+2024-07-15T21:30:19.222258900 : INFO : 6. Issue Subscriber
+2024-07-15T21:30:19.222258900 : INFO : 7. Add new Item
+2024-07-15T21:30:19.222258900 : INFO : 8. Remove Item
+2024-07-15T21:30:19.223259 : INFO : 9. Update Item price
+2024-07-15T21:30:19.223259 : INFO : *********************************
+2024-07-15T21:30:19.223259 : INFO : Please choose an option:
+2024-07-15T21:30:22.519697400 : INFO : 
+
+
+*********************************
+2024-07-15T21:30:22.520698100 : INFO : Cancel Ticket Menu
+2024-07-15T21:30:22.520698100 : INFO : 0. Back
+2024-07-15T21:30:22.520698100 : INFO : 1. Cancel Ticket
+2024-07-15T21:30:22.521697500 : INFO : 2. Cancel Subscription
+2024-07-15T21:30:22.521697500 : INFO : *********************************
+2024-07-15T21:30:22.521697500 : INFO : Please choose an option:
+2024-07-15T21:30:24.334671500 : INFO : Enter your ID (a 9-digit number): 
+2024-07-15T21:30:27.143542300 : INFO : 
+
+ticket ID: 1
+visitor ID: 111111111
+price: 71
+purchase Date: 2024-07-15
+ticket Type: Adult
+is already used? false
+is cancelled? false
+Selled by admin
+
+
+2024-07-15T21:30:27.144555400 : INFO : Ticket Cancel done successfully
+
+2024-07-15T21:30:27.145542200 : INFO : 
+
+
+*********************************
+2024-07-15T21:30:27.146568200 : INFO : Cancel Ticket Menu
+2024-07-15T21:30:27.147545300 : INFO : 0. Back
+2024-07-15T21:30:27.148583600 : INFO : 1. Cancel Ticket
+2024-07-15T21:30:27.148583600 : INFO : 2. Cancel Subscription
+2024-07-15T21:30:27.148583600 : INFO : *********************************
+2024-07-15T21:30:27.149540700 : INFO : Please choose an option:
+2024-07-15T21:30:32.034200200 : INFO : Exiting Cancel Ticket Menu...
+2024-07-15T21:30:32.035148600 : INFO : 
+
+
+*********************************
+2024-07-15T21:30:32.036151 : INFO : Main Menu
+2024-07-15T21:30:32.037149 : INFO : 0. Log-out
+2024-07-15T21:30:32.038148900 : INFO : 1. Buy Ticket
+2024-07-15T21:30:32.039151400 : INFO : 2. Cancel Ticket
+2024-07-15T21:30:32.039151400 : INFO : 3. Find ticket by ID
+2024-07-15T21:30:32.039151400 : INFO : 4. Print purchase history by visitor ID & Date
+2024-07-15T21:30:32.040146500 : INFO : 5. Issue Ticket
+2024-07-15T21:30:32.040146500 : INFO : 6. Issue Subscriber
+2024-07-15T21:30:32.040146500 : INFO : 7. Add new Item
+2024-07-15T21:30:32.041147 : INFO : 8. Remove Item
+2024-07-15T21:30:32.041147 : INFO : 9. Update Item price
+2024-07-15T21:30:32.041147 : INFO : *********************************
+2024-07-15T21:30:32.042146800 : INFO : Please choose an option:
+2024-07-15T21:30:33.172493800 : INFO : Exiting Main Menu...
+2024-07-15T21:30:33.173455400 : INFO : 
+
+
+*********************************
+2024-07-15T21:30:33.174456 : INFO : Log-in Menu
+2024-07-15T21:30:33.175525500 : INFO : 0. Back
+2024-07-15T21:30:33.175525500 : INFO : 1. Create New Worker Account
+2024-07-15T21:30:33.175525500 : INFO : 2. Log-In
+2024-07-15T21:30:33.176453500 : INFO : *********************************
+2024-07-15T21:30:33.177456100 : INFO : Please choose an option:
+2024-07-15T21:30:33.728683500 : INFO : Exiting Log-in Menu...
+2024-07-15T21:30:33.729690700 : INFO : 
+2024-07-15T21:30:33.730683200 : INFO : Welcome To Our Zoo!
+2024-07-15T21:30:33.731689400 : INFO : Please Enter The Number Of Your Choice:
+2024-07-15T21:30:33.732685700 : INFO : 	1) Zoo Info.
+2024-07-15T21:30:33.732685700 : INFO : 	2) See All Penguins.
+2024-07-15T21:30:33.733681800 : INFO : 	3) Add A New Penguin.
+2024-07-15T21:30:33.733681800 : INFO : 	4) See All Predetory Animals.
+2024-07-15T21:30:33.733681800 : INFO : 	5) Add A New Predetory Animals.
+2024-07-15T21:30:33.734680500 : INFO : 	6) See All The Fish In The Aquarium.
+2024-07-15T21:30:33.734680500 : INFO : 	7) Add Fish To The Aquarium. 
+2024-07-15T21:30:33.734680500 : INFO : 	8) Feed The Animals.
+2024-07-15T21:30:33.734680500 : INFO : 	9) Listen To The Animals Voices.
+2024-07-15T21:30:33.735681900 : INFO : 	10) Move Forward A Year (Next Year).
+2024-07-15T21:30:33.735681900 : INFO : 	11) Change Penguin Sorting Strategy.
+2024-07-15T21:30:33.735681900 : INFO : 	12) The New Animals Sectione.
+2024-07-15T21:30:33.736682800 : INFO : 	13) Visitor management system.
+2024-07-15T21:30:33.736682800 : INFO : 	ENTER 0 TO EXIT.
+2024-07-15T21:30:34.448114200 : INFO : Good Bye!!
