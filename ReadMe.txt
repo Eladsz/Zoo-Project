@@ -85,6 +85,10 @@ Part 2 - We changed the program file structure to apply the SOLID principle:
 
 	In part one we already made the ticket usage option. (Users.Visitor -> VisitorManagmentSystem)
 
+Part 3 - We added 2 new design pattern: Logger observer and factory.
+
+	 We added a class diagram.
+
 
 	
 			
